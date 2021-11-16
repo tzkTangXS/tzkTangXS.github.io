@@ -469,14 +469,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -556,6 +556,24 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>NodeManager内存和服务器实际内存配置尽量接近，如服务器有128g内存，但是NodeManager默认内存8G，不修改该参数最多只能用8G内存。NodeManager使用的CPU核数和服务器CPU核数尽量接近。</p>
 <p>①yarn.nodemanager.resource.memory-mb   NodeManager使用内存数</p>
 <p>②yarn.nodemanager.resource.cpu-vcores  NodeManager使用CPU核数</p>
+<h2 id="kafka压测"><a href="#kafka压测" class="headerlink" title="kafka压测"></a>kafka压测</h2><h3 id="生产压测"><a href="#生产压测" class="headerlink" title="生产压测"></a>生产压测</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">kafka-topics.sh --zookeeper hadoop101:2181,hadoop102:2181,hadoop103:2181&#x2F;kafka --create --replication-factor 2 --partitions 3 --topic test
+#再来一遍
+kafka-topics.sh --zookeeper hadoop101:2181,hadoop102:2181,hadoop103:2181&#x2F;kafka --create --replication-factor 2 partitions 3 --topic test
+#在来亿遍
+kafka-topics.sh --zookeeper hadoop101:2181,hadoop102:2181,hadoop103:2181&#x2F;kafka --create --replication-factor 2 --partitions 3 --topic test
+
+
+#生产测试
+
+kafka-producer-perf-test.sh  --topic test --record-size 100 --num-records 10000000 --throughput -1 --producer-props bootstrap.servers&#x3D;hadoop101:9092,hadoop102:9092,hadoop103:9092
+
+kafka-producer-perf-test.sh --topic test --record-size 100 --num-records 10000000 --throughput -1 --producer-props bootstrap.servers&#x3D;hadoop101:9092,hadoop102:9092,hadoop103:9092<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>测试结果图:<br><img src="/2021/11/16/ebdw/25ec958a-9caf-446e-b8f1-3108cc678cb9.png"><br>集群总带宽: 12.5 + 12.5 + 12.5 约等于 10 + 10 + 10 = 30M/s<br>由于有两个副本,则传输速度应该为: 30 / 2 = 15M/s<br><font color="red"><em>测试结果与预期相符</em></font><br>###　消费压测</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">kafka-consumer-perf-test.sh --broker-list hadoop101:9092,hadoop102:9092,hadoop103:9092 --topic test --fetch-size 10000 --messages 10000000 --threads 1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="/2021/11/16/ebdw/0f7172e2-a88d-470a-ac6c-836b934c59af.png"><br>将 fetch-size的值加大10倍</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># threads 地址对结果没影响,因为底层源码中并没有调取它
+kafka-consumer-perf-test.sh --broker-list hadoop101:9092,hadoop102:9092,hadoop103:9092 --topic test --fetch-size 100000 --messages 10000000 --threads 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/2021/11/16/ebdw/d59fa9ae-e296-4409-8b77-dd151b80559b.png"></p>
 
                 
             </div>
@@ -1090,7 +1108,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">6.7k</span>&nbsp;字
+                class="white-color">6.9k</span>&nbsp;字
             
             
             
