@@ -452,7 +452,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    385
+                    368
                 </div>
                 
 
@@ -492,14 +492,14 @@
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>计算公式</strong><br><img src="/2021/11/16/hadoop-can-shu-diao-you/bb5a529f-803b-4b8b-ad8c-27ca2108be24.png"></p>
 <p>通过python实现计算</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">[tzk@hadoop101 hadoop-3.1.3]$ python
-Python 2.7.5 (default, Apr  2 2020, 13:16:51) 
-[GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux2
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt; import math
-&gt;&gt;&gt; print int(20*math.log(3))
-21
-&gt;&gt;&gt; quit()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token punctuation">[</span>tzk@hadoop101 hadoop-3.1.3<span class="token punctuation">]</span>$ python
+Python <span class="token number">2.7</span>.5 <span class="token punctuation">(</span>default, Apr  <span class="token number">2</span> <span class="token number">2020</span>, <span class="token number">13</span>:16:51<span class="token punctuation">)</span> 
+<span class="token punctuation">[</span>GCC <span class="token number">4.8</span>.5 <span class="token number">20150623</span> <span class="token punctuation">(</span>Red Hat <span class="token number">4.8</span>.5-39<span class="token punctuation">)</span><span class="token punctuation">]</span> on linux2
+Type <span class="token string">"help"</span>, <span class="token string">"copyright"</span>, <span class="token string">"credits"</span> or <span class="token string">"license"</span> <span class="token keyword">for</span> <span class="token function">more</span> information.
+<span class="token operator">>></span><span class="token operator">></span> <span class="token function">import</span> math
+<span class="token operator">>></span><span class="token operator">></span> print int<span class="token punctuation">(</span><span class="token number">20</span>*math.log<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">))</span>
+<span class="token number">21</span>
+<span class="token operator">>></span><span class="token operator">></span> quit<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="2-）YARN参数调优"><a href="#2-）YARN参数调优" class="headerlink" title="2 ）YARN参数调优"></a><strong>2</strong> ）YARN参数调优</h2><p><strong>yarn-site.xml</strong><br>（1）情景描述：总共7台机器，每天几亿条数据，数据源-&gt;Flume-&gt;Kafka-&gt;HDFS-&gt;Hive</p>
 <p>面临问题：数据统计主要用HiveSQL，没有数据倾斜，小文件已经做了合并处理，开启的JVM重用，而且IO没有阻塞，内存用了不到50%。但是还是跑的非常慢，而且数据量洪峰过来时，整个集群都会宕掉。基于这种情况有没有优化方案。</p>
 <p>（2）解决办法：</p>
