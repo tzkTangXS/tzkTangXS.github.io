@@ -8,7 +8,7 @@
       <link href="/2021/11/16/udtf/"/>
       <url>/2021/11/16/udtf/</url>
       
-        <content type="html"><![CDATA[<h2 id="原理解释"><a href="#原理解释" class="headerlink" title="原理解释"></a>原理解释</h2><p>Hive 的每一个sql会被解释成一个个的operator组成operators,<br>数据放在java中的object中,<br>数据类型放在object inspector中<br>在oprator之间传递.</p><blockquote><p>edit:<br>(object inspector提供了用以解析保存在object中的数据的方法)</p></blockquote><p><img src="index_files/db72d753-06c0-4f5d-983e-1c2e52562e5f.png"></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="原理解释"><a href="#原理解释" class="headerlink" title="原理解释"></a>原理解释</h2><p>Hive 的每一个sql会被解释成一个个的operator组成operators,<br>数据放在java中的object中,<br>数据类型放在object inspector中<br>在oprator之间传递.</p><blockquote><p>edit:<br>(object inspector提供了用以解析保存在object中的数据的方法)</p></blockquote><p><img src="images/udtf.png"><br><a href="https://f60bec40.wiz06.com/wapp/pages/view/share/s/3S2-N02Et17F2tGvlH3MdUWD0HjvNV08rABS2UL3b20OfkF7">我的为知笔记</a></p>]]></content>
       
       
       <categories>
