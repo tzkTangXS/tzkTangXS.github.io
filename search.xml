@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>适用所有情况的VM扩容(在做数仓时遇到的问题)</title>
+      <link href="/2021/11/17/xu-ni-ji-kuo-rong/"/>
+      <url>/2021/11/17/xu-ni-ji-kuo-rong/</url>
+      
+        <content type="html"><![CDATA[<p><strong>edti:</strong></p><ul><li>   <strong>起因:</strong> 在做数仓项目的时候,由于数据过多,划分的磁盘不够用了,需要在根目录下扩容.</li><li>   <strong>但是:</strong> 由于当初下载的是最小版centos,导致根本没有分组卷等等一些情况.网上的扩容方法并不适用于我.</li><li>   <strong>解决思路:</strong> 于是乎想到了,划分的是一块地址连续的空间,那么只要满足”/“的这块空间是扩容后空间的子集那么数据就没有问题了,至于紧随其后的swap分区,本身就是交换分区,从新在尾部再划一块给他就行了</li><li>   <strong>使用范围:</strong> 该方法适用于所有情况.</li></ul><h2 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">lsblk -f<span class="token function">fdisk</span> -l<span class="token comment">#查看磁盘使用情况</span><span class="token function">df</span> -h<span class="token comment">#如果swap分区在根分区的下面，那么肯定要重新划分swap分区的。查看下swap分区的情况</span><span class="token function">free</span> -h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="删除当前分区，并且重新划分大小"><a href="#删除当前分区，并且重新划分大小" class="headerlink" title="删除当前分区，并且重新划分大小"></a>删除当前分区，并且重新划分大小</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">fdisk</span> /dev/sda<span class="token comment">#查看分区</span>p<span class="token comment">#删除指定分区</span>d<span class="token comment">#选择你所要删除的分区序列号</span><span class="token comment">#添加新分区</span>n<span class="token comment">#选择相同序列好即可</span><span class="token comment">#重新分配大小，即：start --> end</span><span class="token comment">#写入分区操作</span>w<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><h3 id="查看分区格式"><a href="#查看分区格式" class="headerlink" title="查看分区格式"></a>查看分区格式</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">lsblk -f<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">reboot</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="更具分区类型执行以下"><a href="#更具分区类型执行以下" class="headerlink" title="更具分区类型执行以下"></a>更具分区类型执行以下</h2><h3 id="如果分区是-ext格式"><a href="#如果分区是-ext格式" class="headerlink" title="如果分区是 ext格式"></a>如果分区是 ext格式</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">resize2fs /dev/sda2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="如果分区是xfs格式"><a href="#如果分区是xfs格式" class="headerlink" title="如果分区是xfs格式"></a>如果分区是xfs格式</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">xfs_growfs /dev/sda2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="查看磁盘使用情况"><a href="#查看磁盘使用情况" class="headerlink" title="查看磁盘使用情况"></a>查看磁盘使用情况</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">df</span> -h<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="就此更目录扩容完成，但是如果你的swap分区的序列在你的更目录的下面，那么就需要重新划分一下swap分区。"><a href="#就此更目录扩容完成，但是如果你的swap分区的序列在你的更目录的下面，那么就需要重新划分一下swap分区。" class="headerlink" title="就此更目录扩容完成，但是如果你的swap分区的序列在你的更目录的下面，那么就需要重新划分一下swap分区。"></a>就此更目录扩容完成，但是如果你的swap分区的序列在你的更目录的下面，那么就需要重新划分一下swap分区。</h2><h2 id="查看swap分区"><a href="#查看swap分区" class="headerlink" title="查看swap分区"></a>查看swap分区</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">lsblk -f<span class="token function">free</span> -h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p><strong>发现没有uuid,没有该分区，大小为0G</strong><br>制造swap分区</p><hr><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">mkswap</span> /dev/sda3<span class="token comment">#查看uuid</span>blkid /dev/sda3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="将这个写入-etc-fstab-并挂载所有"><a href="#将这个写入-etc-fstab-并挂载所有" class="headerlink" title="将这个写入/etc/fstab,并挂载所有"></a>将这个写入/etc/fstab,并挂载所有</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#将sda3的uuid改为当前新的uuid即可</span><span class="token function">vim</span> /etc/fstab<span class="token comment">#挂载所有</span><span class="token function">mount</span> -a<span class="token comment">#再次查看</span><span class="token function">free</span> -h<span class="token comment">#发现已经挂载了swap分区</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hive常用函数</title>
       <link href="/2021/11/17/chang-yong-han-shu/"/>
       <url>/2021/11/17/chang-yong-han-shu/</url>

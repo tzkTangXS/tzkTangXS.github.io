@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Data warehouse,DW,EBDW">
+    <meta name="keywords" content="linux扩容,virtual machine">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>数仓分成 | tzkTangXS</title>
+    <title>适用所有情况的VM扩容(在做数仓时遇到的问题) | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">数仓分成</h1>
+                    <h1 class="description center-align post-title">适用所有情况的VM扩容(在做数仓时遇到的问题)</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Data-Warehouse/">
-                                <span class="chip bg-color">Data Warehouse</span>
+                            <a href="/tags/shell/">
+                                <span class="chip bg-color">shell</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Data-Warehouse/" class="post-category">
-                                Data Warehouse
+                            <a href="/categories/linux/" class="post-category">
+                                linux
                             </a>
                         
                     </div>
@@ -465,14 +465,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    720
+                    482
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -495,174 +495,76 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="数据库分层图"><a href="#数据库分层图" class="headerlink" title="数据库分层图"></a>数据库分层图</h2><p><img src="/2021/11/17/shu-ju-cang-ku-fen-ceng/387d3d14-02d2-4a6d-940c-29fa6232be81.png"></p>
-<h2 id="数据库各层的功能解析"><a href="#数据库各层的功能解析" class="headerlink" title="数据库各层的功能解析"></a>数据库各层的功能解析</h2><ol>
-<li><p>ODS：元数据层，对于原始数据的一个备份</p>
-</li>
-<li><p>DWD：数据明细层，对数据的一个清洗（判空过滤，去除脏数据），保存业务事实明细，一行数据代表用户的一次业务行为。如：一次下单。</p>
-</li>
-<li><p>ADS：数据应用层，为各种报表提供数据支持。</p>
-</li>
-<li><p>DIM：维度层，对数据的维度建模主要是业务事实信息的描述。何人，何时，何地</p>
-</li>
-<li><p>DWS：服务数据层，按天进行轻度汇总。一行信息代表一个主题对象的一天汇总行为。</p>
-</li>
-<li><p>DWT：主题数据层，数据累计汇总，一行信息代表一个主题对象的一段时间数据的累计汇总。</p>
-</li>
-</ol>
-<h2 id="为什么要数据分层："><a href="#为什么要数据分层：" class="headerlink" title="为什么要数据分层："></a>为什么要数据分层：</h2><ol>
-<li><p>隔离原始数据：对数据进行备份，解耦（将原始数据和统计数据据解耦开）。</p>
-</li>
-<li><p>减少重复开发：规范数据分层，通过中间层数据，减少数据的重复开发，一次计算多次复用。</p>
-</li>
-<li><p>把复杂任务简单化： 把任务分层处理，每层只处理简单问题。方便问题的定位。<br>命名规范</p>
-</li>
-</ol>
+                <p><strong>edti:</strong></p>
+<ul>
+<li>   <strong>起因:</strong> 在做数仓项目的时候,由于数据过多,划分的磁盘不够用了,需要在根目录下扩容.</li>
+<li>   <strong>但是:</strong> 由于当初下载的是最小版centos,导致根本没有分组卷等等一些情况.网上的扩容方法并不适用于我.</li>
+<li>   <strong>解决思路:</strong> 于是乎想到了,划分的是一块地址连续的空间,那么只要满足”/“的这块空间是扩容后空间的子集那么数据就没有问题了,至于紧随其后的swap分区,本身就是交换分区,从新在尾部再划一块给他就行了</li>
+<li>   <strong>使用范围:</strong> 该方法适用于所有情况.</li>
+</ul>
+<h2 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">lsblk -f
+
+
+<span class="token function">fdisk</span> -l
+<span class="token comment">#查看磁盘使用情况</span>
+<span class="token function">df</span> -h
+<span class="token comment">#如果swap分区在根分区的下面，那么肯定要重新划分swap分区的。查看下swap分区的情况</span>
+<span class="token function">free</span> -h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="删除当前分区，并且重新划分大小"><a href="#删除当前分区，并且重新划分大小" class="headerlink" title="删除当前分区，并且重新划分大小"></a>删除当前分区，并且重新划分大小</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">fdisk</span> /dev/sda
+<span class="token comment">#查看分区</span>
+p
+<span class="token comment">#删除指定分区</span>
+d
+<span class="token comment">#选择你所要删除的分区序列号</span>
+
+
+<span class="token comment">#添加新分区</span>
+n
+<span class="token comment">#选择相同序列好即可</span>
+
+
+<span class="token comment">#重新分配大小，即：start --> end</span>
+
+
+<span class="token comment">#写入分区操作</span>
+w<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><h3 id="查看分区格式"><a href="#查看分区格式" class="headerlink" title="查看分区格式"></a>查看分区格式</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">lsblk -f<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">reboot</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="更具分区类型执行以下"><a href="#更具分区类型执行以下" class="headerlink" title="更具分区类型执行以下"></a>更具分区类型执行以下</h2><h3 id="如果分区是-ext格式"><a href="#如果分区是-ext格式" class="headerlink" title="如果分区是 ext格式"></a>如果分区是 ext格式</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">resize2fs /dev/sda2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="如果分区是xfs格式"><a href="#如果分区是xfs格式" class="headerlink" title="如果分区是xfs格式"></a>如果分区是xfs格式</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">xfs_growfs /dev/sda2
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="查看磁盘使用情况"><a href="#查看磁盘使用情况" class="headerlink" title="查看磁盘使用情况"></a>查看磁盘使用情况</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">df</span> -h<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="就此更目录扩容完成，但是如果你的swap分区的序列在你的更目录的下面，那么就需要重新划分一下swap分区。"><a href="#就此更目录扩容完成，但是如果你的swap分区的序列在你的更目录的下面，那么就需要重新划分一下swap分区。" class="headerlink" title="就此更目录扩容完成，但是如果你的swap分区的序列在你的更目录的下面，那么就需要重新划分一下swap分区。"></a>就此更目录扩容完成，但是如果你的swap分区的序列在你的更目录的下面，那么就需要重新划分一下swap分区。</h2><h2 id="查看swap分区"><a href="#查看swap分区" class="headerlink" title="查看swap分区"></a>查看swap分区</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">lsblk -f
+<span class="token function">free</span> -h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>发现没有uuid,没有该分区，大小为0G</strong><br>制造swap分区</p>
 <hr>
-<ul>
-<li>   表名</li>
-</ul>
-<p>Ø  ODS层命名为ods_表名</p>
-<p>Ø  DIM层命名为dim_表名</p>
-<p>Ø  DWD层命名为dwd_表名</p>
-<p>Ø  DWS层命名为dws_表名  </p>
-<p>Ø  DWT层命名为dwt_表名</p>
-<p>Ø  ADS层命名为ads_表名</p>
-<p>Ø  临时表命名为tmp_表名</p>
-<ul>
-<li>脚本名<br>数据源_to_目标_db/log.sh<br>行为数据：log<br>业务数据：db</li>
-<li>   字段类型<br>金钱：decimal(16,2), edit:16表示16位有效数字，2表示，其中小数部分为2位<br>数量：bigint<br>时间戳类型：bigint</li>
-</ul>
-<p>主外键类型为：string<br>建模理论</p>
-<hr>
-<h3 id="关系建模"><a href="#关系建模" class="headerlink" title="关系建模"></a>关系建模</h3><p>遵循三范式</p>
-<ol>
-<li><p>属性不可切</p>
-</li>
-<li><p>部分函数依赖不可有<br> 非主键不可部分函数依赖于主键</p>
-</li>
-<li><p>传递函数依赖不可有<br> 非主键不可传递函数依赖于主键</p>
-</li>
-</ol>
-<h3 id="维度建模"><a href="#维度建模" class="headerlink" title="维度建模"></a>维度建模</h3><h4 id="维度表"><a href="#维度表" class="headerlink" title="维度表"></a>维度表</h4><p>对事实的描述。包含大量属性。</p>
-<h4 id="事实表"><a href="#事实表" class="headerlink" title="事实表"></a>事实表</h4><p>业务事件</p>
-<p>维度表的外键+度量值</p>
-<ul>
-<li>事实表的类型分类：</li>
-</ul>
-<ol>
-<li>事务型事实表<br>使用增量同步</li>
-<li>周期型快照事实表<br>使用全量同步</li>
-<li>累积周期性快照事实表<br>使用增量修改同步</li>
-</ol>
-<p><strong>业务总线矩阵</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">事实\维度</th>
-<th align="center">时间</th>
-<th align="center">用户</th>
-<th align="center">地区</th>
-<th align="center">商品</th>
-<th align="center">优惠券</th>
-<th align="center">活动</th>
-<th align="center">度量值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">订单</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">运费,优惠金额</td>
-</tr>
-<tr>
-<td align="left">订单明细</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center">商品件数,订单金额,优惠金额</td>
-</tr>
-<tr>
-<td align="left">支付</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">支付金额</td>
-</tr>
-<tr>
-<td align="left">加购</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">商品件数,金额</td>
-</tr>
-<tr>
-<td align="left">收藏</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">收藏次数(1)</td>
-</tr>
-<tr>
-<td align="left">退单</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">商品件数,退单金额</td>
-</tr>
-<tr>
-<td align="left">退款</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">商品件数,退款金额</td>
-</tr>
-<tr>
-<td align="left">评价</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">评价次数(1)</td>
-</tr>
-<tr>
-<td align="left">优惠券领用</td>
-<td align="center">&radic;</td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">&radic;</td>
-<td align="center"></td>
-<td align="center">领券次数(1)</td>
-</tr>
-</tbody></table>
-<ul>
-<li><input checked disabled type="checkbox"> 理解没有</li>
-</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">mkswap</span> /dev/sda3
+<span class="token comment">#查看uuid</span>
+blkid /dev/sda3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="将这个写入-etc-fstab-并挂载所有"><a href="#将这个写入-etc-fstab-并挂载所有" class="headerlink" title="将这个写入/etc/fstab,并挂载所有"></a>将这个写入/etc/fstab,并挂载所有</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#将sda3的uuid改为当前新的uuid即可</span>
+
+<span class="token function">vim</span> /etc/fstab
+<span class="token comment">#挂载所有</span>
+<span class="token function">mount</span> -a
+
+<span class="token comment">#再次查看</span>
+<span class="token function">free</span> -h
+<span class="token comment">#发现已经挂载了swap分区</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 
             </div>
@@ -689,7 +591,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2021/11/17/shu-ju-cang-ku-fen-ceng/">http://tzktangxs.github.io/2021/11/17/shu-ju-cang-ku-fen-ceng/</a>
+                    <a href="http://tzktangxs.github.io/2021/11/17/xu-ni-ji-kuo-rong/">http://tzktangxs.github.io/2021/11/17/xu-ni-ji-kuo-rong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -727,8 +629,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Data-Warehouse/">
-                                    <span class="chip bg-color">Data Warehouse</span>
+                                <a href="/tags/shell/">
+                                    <span class="chip bg-color">shell</span>
                                 </a>
                             
                         </div>
@@ -898,66 +800,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/11/17/hadoop-duan-kou/">
+                <a href="/2021/11/17/xu-ni-ji-kuo-rong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="hadoop端口使用情况汇总(记)">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="适用所有情况的VM扩容(在做数仓时遇到的问题)">
                         
-                        <span class="card-title">hadoop端口使用情况汇总(记)</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/hadoop/" class="post-category">
-                                    hadoop
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/hadoop%E7%AB%AF%E5%8F%A3/">
-                        <span class="chip bg-color">hadoop端口</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/11/17/git-chang-gui-zhi-ling/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="git常规指令">
-                        
-                        <span class="card-title">git常规指令</span>
+                        <span class="card-title">适用所有情况的VM扩容(在做数仓时遇到的问题)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -974,8 +828,58 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/git/" class="post-category">
-                                    git
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/shell/">
+                        <span class="chip bg-color">shell</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/11/17/chang-yong-han-shu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="hive常用函数">
+                        
+                        <span class="card-title">hive常用函数</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/hive/" class="post-category">
+                                    hive
                                 </a>
                             
                             
@@ -985,8 +889,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/git/">
-                        <span class="chip bg-color">git</span>
+                    <a href="/tags/hive/">
+                        <span class="chip bg-color">hive</span>
+                    </a>
+                    
+                    <a href="/tags/function/">
+                        <span class="chip bg-color">function</span>
                     </a>
                     
                 </div>
