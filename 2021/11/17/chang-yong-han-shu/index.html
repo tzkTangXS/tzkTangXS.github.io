@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="hadoop,hadoop端口">
+    <meta name="keywords" content="DQL,hql">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>hadoop端口使用情况汇总(记) | tzkTangXS</title>
+    <title>hive常用函数 | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -315,7 +315,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">hadoop端口使用情况汇总(记)</h1>
+                    <h1 class="description center-align post-title">hive常用函数</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/hadoop%E7%AB%AF%E5%8F%A3/">
-                                <span class="chip bg-color">hadoop端口</span>
+                            <a href="/tags/hive/">
+                                <span class="chip bg-color">hive</span>
+                            </a>
+                        
+                            <a href="/tags/function/">
+                                <span class="chip bg-color">function</span>
                             </a>
                         
                     </div>
@@ -443,8 +447,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/hadoop/" class="post-category">
-                                hadoop
+                            <a href="/categories/hive/" class="post-category">
+                                hive
                             </a>
                         
                     </div>
@@ -465,14 +469,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    246
+                    395
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -495,92 +499,26 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="汇总表"><a href="#汇总表" class="headerlink" title="汇总表"></a>汇总表</h2><table>
-<thead>
-<tr>
-<th align="center">端口名称</th>
-<th align="center">hadoop2.x</th>
-<th align="center">hadoop3.x</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">NameNode内部通信端口</td>
-<td align="center"><font color="red">8082</font>/9000</td>
-<td align="center"><font color="red">8082</font>/9000/9820</td>
-</tr>
-<tr>
-<td align="center">NameNode Web端口</td>
-<td align="center"><font color="red">50070</font></td>
-<td align="center"><font color="red">9870</font></td>
-</tr>
-<tr>
-<td align="center">MapReduce查看执行任务端口</td>
-<td align="center">8088</td>
-<td align="center">8088</td>
-</tr>
-<tr>
-<td align="center">历史服务器 WEB端口</td>
-<td align="center">19888</td>
-<td align="center">19888</td>
-</tr>
-</tbody></table>
-<h2 id="NameNode"><a href="#NameNode" class="headerlink" title="NameNode"></a>NameNode</h2><h3 id="服务器端口"><a href="#服务器端口" class="headerlink" title="服务器端口"></a>服务器端口</h3><p>core-site.xml</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">
-<span class="token comment">&lt;!-- 指定NameNode的地址 --></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>fs.defaultFS<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>hdfs://hadoop102:8020<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="web端口"><a href="#web端口" class="headerlink" title="web端口"></a>web端口</h3><p>hdfs-site.xml</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!-- nn web端访问地址--></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>dfs.namenode.http-address<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>hadoop102:9870<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h2 id="SeconderyNameNode"><a href="#SeconderyNameNode" class="headerlink" title="SeconderyNameNode"></a>SeconderyNameNode</h2><h3 id="web端"><a href="#web端" class="headerlink" title="web端"></a>web端</h3><p>9868<br>hdfs-site.xml</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!-- 2nn web端访问地址--></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>dfs.namenode.secondary.http-address<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>hadoop104:9868<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="历史服务器的端口配置："><a href="#历史服务器的端口配置：" class="headerlink" title="历史服务器的端口配置："></a>历史服务器的端口配置：</h2><ul>
-<li><p>   服务器:<br>10020</p>
+                <p>#nvl<br>select nvl(salary,0) from emp;<br>#时间函数<br>select date_format(‘2017-3-4’,’yyyy-mm-dd HH:mm:ss’);</p>
+<ul>
+<li><p>   select date_add(‘2017-6-29’,4);<br>terminal: 2017-7-3</p>
 </li>
-<li><p>   web端：<br>19888</p>
+<li><p>   select date_add(‘2017-6-27’,-4);<br>terminal: 2017-6-23</p>
+</li>
+<li><p>   select datediff(‘2017-7-3’,’2017-6-29’);<br>terminal: 4</p>
+</li>
+<li><p>   select datediff(‘2017-6-29’,’2017-7-3’);<br>terminal: -4</p>
+</li>
+<li><p>   select regexp_replace(‘2019/07/03’,’/‘,’-‘);<br>terminal: 2019-07-03</p>
 </li>
 </ul>
-<h3 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h3><p>mapred-site.xml</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">
-&lt;!-- 历史服务器端地址 --&gt;
-
-&lt;property&gt;
-
-&lt;name&gt;mapreduce.jobhistory.address&lt;&#x2F;name&gt;
-
-    &lt;value&gt;hadoop101:10020&lt;&#x2F;value&gt;
-
-&lt;&#x2F;property&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="web端-1"><a href="#web端-1" class="headerlink" title="web端"></a>web端</h3><p>mapred-site.xml</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">
-&lt;!-- 历史服务器web端地址 --&gt;
-
-&lt;property&gt;
-
-&lt;name&gt;mapreduce.jobhistory.webapp.address&lt;&#x2F;name&gt;
-
-    &lt;value&gt;hadoop102:19888&lt;&#x2F;value&gt;
-
-&lt;&#x2F;property&gt;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<h1 id><a href="#" class="headerlink" title></a></h1><p>select sum(case sex when ‘男’  then 1 else 0 end) male_count,<br>sum(case sex when ‘女’ then 1 else 0 end) female_count<br>from emp group by deptno order by deptno;</p>
+<p>#concat//行转列<br>##第一步 t1<br>select concat_sw(‘,’,xz,xx) xz_xx<br>from<br>emp;<br>##第二步t2<br>select<br>t1.xz_xx, concat_sw(‘|’,collect_set(t1.name))<br>from t1<br>group by t1.xz_xx;<br>##第三步:整合<br>select<br>t1.xz_xx, concat_sw(‘|’,collect_set(t1.name))<br>from<br>(<br>select concat_sw(‘,’,xz,xx) xz_xx<br>from<br>emp;<br>)    t1<br>group by t1.xz_xx;<br>#列转行<br>##explode 将hive中复杂的array 或 map 拆分<br>###example<br>create table if not exists movie_info(<br>movie_name string,<br>category array<string><br>)<br>row format delimited fields terminated by ‘\t’<br>collection items terminated by ‘,’</string></p>
+<p>load data local inpath ‘/opt/module/datas/movie.txt’ into table into movie_info;</p>
+<p>select<br>movie,<br>category_name<br>from<br>movie_info lateral view explode(category) table_tmp as category_name;</p>
+<p>select<br>movie_name,<br>category_name<br>from<br>movie_info cateral view explode(category) table_tmp as catgory_name;<br>#窗口函数<br>##over():<br>指定分析函数工作窗口大小，随着行变化<br>####current row<br>####n preceding:    向前移动n行<br>####n following:    向后移动N行<br>####unbounded    启点<br>unbounded preceding<br>unbounded following<br>##lag(col,n);<br>##lead(col,n);<br>#ntile(n)    把有序分区的行分发到指定数据的组中，各个组有编号，编号从1开始。对于每一个ntile返回此行所属的组的编号。<br>create table if not exists business(<br>name string,<br>order_date date,<br>cost double<br>)<br>row format delimited fields terminated by ‘,’</p>
+<p>load data local inpath ‘/opt/module/data/business’<br>into table business;<br>##查询2017-04购买过商品的顾客及总人数<br>select name,count(*) over()<br>from business<br>where substring(orderdate,1,7) = ‘2017-04’<br>group by name;<br>##查询顾客购买明细，及月购买总额。<br>select *,sum(cost) over(partitioned by month(order_date))<br>from<br>business;</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a></h2>
                 
             </div>
             <hr/>
@@ -606,7 +544,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2021/11/17/hadoop-duan-kou/">http://tzktangxs.github.io/2021/11/17/hadoop-duan-kou/</a>
+                    <a href="http://tzktangxs.github.io/2021/11/17/chang-yong-han-shu/">http://tzktangxs.github.io/2021/11/17/chang-yong-han-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -644,8 +582,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/hadoop%E7%AB%AF%E5%8F%A3/">
-                                    <span class="chip bg-color">hadoop端口</span>
+                                <a href="/tags/hive/">
+                                    <span class="chip bg-color">hive</span>
+                                </a>
+                            
+                                <a href="/tags/function/">
+                                    <span class="chip bg-color">function</span>
                                 </a>
                             
                         </div>
@@ -815,70 +757,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/11/17/shell-jiao-ben/">
+                <a href="/2021/11/17/chang-yong-han-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="shell指令(电商数仓项目)">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="hive常用函数">
                         
-                        <span class="card-title">shell指令(电商数仓项目)</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/shell/" class="post-category">
-                                    shell
-                                </a>
-                            
-                            <a href="/categories/shell/Data-Warehouse/" class="post-category">
-                                    Data Warehouse
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/shell/">
-                        <span class="chip bg-color">shell</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/11/17/shu-ju-cang-ku-fen-ceng/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="数仓分成">
-                        
-                        <span class="card-title">数仓分成</span>
+                        <span class="card-title">hive常用函数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -895,8 +785,62 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Data-Warehouse/" class="post-category">
-                                    Data Warehouse
+                            <a href="/categories/hive/" class="post-category">
+                                    hive
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/hive/">
+                        <span class="chip bg-color">hive</span>
+                    </a>
+                    
+                    <a href="/tags/function/">
+                        <span class="chip bg-color">function</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/11/17/dql-pai-xu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="DQL-排序">
+                        
+                        <span class="card-title">DQL-排序</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/hive/" class="post-category">
+                                    hive
                                 </a>
                             
                             
@@ -906,8 +850,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Data-Warehouse/">
-                        <span class="chip bg-color">Data Warehouse</span>
+                    <a href="/tags/DQL/">
+                        <span class="chip bg-color">DQL</span>
+                    </a>
+                    
+                    <a href="/tags/hive/">
+                        <span class="chip bg-color">hive</span>
                     </a>
                     
                 </div>
