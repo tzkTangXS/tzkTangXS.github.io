@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: hive, tzkTangXS">
+    <meta name="keywords" content="分类: Data Warehouse, tzkTangXS">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类: hive | tzkTangXS</title>
+    <title>分类: Data Warehouse | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -364,7 +364,7 @@
                 
                 <a href="/categories/Data-Warehouse/" title="Data Warehouse: 2">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
+                             chip-active "
                             style="background-color: #F9EBEA;">Data Warehouse
                         <span class="tag-length">2</span>
                     </span>
@@ -382,7 +382,7 @@
                 
                 <a href="/categories/hive/" title="hive: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
+                             chip-default "
                             style="background-color: #D5F5E3;">hive
                         <span class="tag-length">1</span>
                     </span>
@@ -427,7 +427,7 @@
                 
                 <a href="/categories/shell/Data-Warehouse/" title="Data Warehouse: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
+                             chip-active "
                             style="background-color: #D7BDE2;">Data Warehouse
                         <span class="tag-length">1</span>
                     </span>
@@ -447,33 +447,45 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/11/16/udtf/">
+                    <a href="/2021/11/17/shell-jiao-ben/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="UDTF原理">
+                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="shell指令(电商数仓项目)">
                             
-                            <span class="card-title">UDTF原理</span>
+                            <span class="card-title">shell指令(电商数仓项目)</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                原理解释Hive 的每一个sql会被解释成一个个的operator组成operators,数据放在java中的object中,数据类型放在object inspector中在oprator之间传递.
+                                集群分发脚本#!/bin/bash
 
-edit:(object inspec
+
+#使用方法:
+#第一个参数输入文件路径
+#如果只同步到一个服务器上就只要在第二个参数上填写服务器编号就行
+#如果是要同步一个范围的服务器,那么写上开始节点和结束节点就行
+
+
+num=$#
+if [ $
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/hive/" class="post-category">
-                                    hive
+                                <a href="/categories/shell/" class="post-category">
+                                    shell
+                                </a>
+                                
+                                <a href="/categories/shell/Data-Warehouse/" class="post-category">
+                                    Data Warehouse
                                 </a>
                                 
                                 
@@ -484,12 +496,8 @@ edit:(object inspec
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/udtf/">
-                            <span class="chip bg-color">udtf</span>
-                        </a>
-                        
-                        <a href="/tags/hive/">
-                            <span class="chip bg-color">hive</span>
+                        <a href="/tags/shell/">
+                            <span class="chip bg-color">shell</span>
                         </a>
                         
                     </div>
