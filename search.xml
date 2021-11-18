@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>awk函数辨析</title>
+      <link href="/2021/11/18/awk-ming-ling-bian-xi/"/>
+      <url>/2021/11/18/awk-ming-ling-bian-xi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="awk命名基础解析"><a href="#awk命名基础解析" class="headerlink" title="awk命名基础解析"></a>awk命名基础解析</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>awk会将传递过来的数据按照一个整体处理的</p><p>awk主要有三模块组成:(可以按照junit测试来理解.)</p><pre><code>BEGIN&#123;&#125;:开始执行前的准备阶段,可以理解为初始化PATTERN&#123;&#125;:操作命令END&#123;&#125;:操作结束后的处理,收尾工作.</code></pre><ul><li>样式<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">awk <span class="token string">'BEGIN&#123;&#125;&#123;&#125;END&#123;&#125;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li></ul><p>由此我们可以想到:    在BEGIN阶段用于指定按照什么分割传入过来的一行数据.</p><h2 id="不多BB直接上案例"><a href="#不多BB直接上案例" class="headerlink" title="不多BB直接上案例"></a>不多BB直接上案例</h2><br><ul><li>example<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment"># 按照","分割 打印出第一列数据(下标从1开始)</span>awk <span class="token string">'BEGIN&#123;FS=","&#125;&#123;print $1&#125;'</span><span class="token comment"># 等价写法</span>awk <span class="token operator">-</span>F<span class="token punctuation">,</span> <span class="token string">'&#123;print $1&#125;'</span><span class="token comment"># 关于\t,就有了一些区别</span><span class="token comment"># 想如下这样写法</span>awk <span class="token operator">-</span>F\t <span class="token string">'&#123;print $1&#125;'</span><span class="token comment"># 这里的\他是识别不到的,直接把他理解成了t</span><span class="token comment"># 即:在他的理解里,当前是按照"t"为分割付进行处理的</span><span class="token comment"># auther: tzkTangXS</span><span class="token comment"># 那么就有两种处理办法</span><span class="token comment"># 1.在加上一个反斜杠"\"将这个原来的"\"转义一下,转义成"\"</span>awk <span class="token operator">-</span>F\\t <span class="token string">'&#123;print $1&#125;'</span><span class="token comment"># 2.第二种写法: 使用''号</span>awk <span class="token operator">-</span>F <span class="token string">'\t'</span> <span class="token string">'&#123;print $1&#125;'</span><span class="token comment"># 讲到了'',那么有一个点就可以提一下:</span><span class="token comment"># 多分割付操作.不多BB,看例题</span>awk <span class="token operator">-</span>F <span class="token string">'[ a]'</span> <span class="token string">'&#123;print $1&#125;'</span> tzkTest<span class="token comment"># 这句话的意识就是:</span><span class="token comment"># 读取tzkTest里的数据.首先按照空格来切割.</span><span class="token comment">#   再然后按照a类切割</span><span class="token comment">#   最后输出第一列</span><span class="token comment"># exmaple</span><span class="token comment"># 假如tzkTest里的数据是如下形式(按\t分割):</span><span class="token comment"># wo heng hao heng shuai</span><span class="token comment"># wo  ui  ni  lk  gs</span>awk <span class="token operator">-</span>F <span class="token string">'[\te]'</span> <span class="token string">'&#123;print $2&#125;'</span><span class="token comment"># terimal</span>huiawk <span class="token operator">-</span>F <span class="token string">'[\te]'</span> <span class="token string">'&#123;print $3&#125;'</span><span class="token comment"># terimal</span>ng<span class="token function">ni</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ul><h2 id="常用参数解释"><a href="#常用参数解释" class="headerlink" title="常用参数解释"></a>常用参数解释</h2><ul><li>NR行数(官方语言)一以读出的记录数目</li><li>NF这一行的列数(字段数目)(官方语言)一条记录的字段数目</li><li>FS指定分隔符</li><li>$n指定第几列(字段)</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+          <category> shell </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ctrl+c,ctrl+z等指令解析</title>
       <link href="/2021/11/18/ctrl-z-ztrl-c-deng-ming-ling-jie-xi/"/>
       <url>/2021/11/18/ctrl-z-ztrl-c-deng-ming-ling-jie-xi/</url>
