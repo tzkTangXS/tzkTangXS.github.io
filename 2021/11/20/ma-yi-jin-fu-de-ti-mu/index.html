@@ -563,7 +563,7 @@
 <span class="token keyword">left</span> <span class="token keyword">join</span> plant_carbon pc2
 <span class="token keyword">on</span> pc2<span class="token punctuation">.</span>plant_id <span class="token operator">&lt;=></span> <span class="token string">'p002'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="第二题答案"><a href="#第二题答案" class="headerlink" title="第二题答案"></a>第二题答案</h4><pre class="line-numbers language-hql" data-language="hql"><code class="language-hql">select t6.user_id,tmp2.key,tmp2.value
+<h4 id="第二题答案"><a href="#第二题答案" class="headerlink" title="第二题答案"></a>第二题答案</h4><pre class="line-numbers language-hive" data-language="hive"><code class="language-hive">select t6.user_id,tmp2.key,tmp2.value
 from(
     select t5.user_id,
        tmp.ex_date
