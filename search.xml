@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>hadoop中 hdfs,yarn..等等流程图及解析</title>
+      <link href="/2021/11/22/hadoop/"/>
+      <url>/2021/11/22/hadoop/</url>
+      
+        <content type="html"><![CDATA[<h2 id="hadoop中-hdfs-yarn-等等流程图"><a href="#hadoop中-hdfs-yarn-等等流程图" class="headerlink" title="hadoop中 hdfs,yarn..等等流程图"></a>hadoop中 hdfs,yarn..等等流程图</h2><h3 id="HDFS写流程图"><a href="#HDFS写流程图" class="headerlink" title="HDFS写流程图:"></a>HDFS写流程图:</h3><h4 id="文字解说"><a href="#文字解说" class="headerlink" title="文字解说:"></a>文字解说:</h4><p><strong>HDFS客户端创建分布式文件系统:</strong></p><ul><li>1.向NameNode提交在HDFS上创建文件的申请.</li><li>DataNode核对:<br>是否拥有权限(是)<br>是否才在此文件(否)</li><li>2.满足条件后,NameNode返回同意响应.</li><li>3.向NameNode提交上传第一个块的请求</li><li>4.NameNode返回用于存储该块的DataNode</li><li>选取策略:<br>本地节点<br>其他机架上的节点<br>其他机架上的不通节点</li></ul><p><strong>收到消息后,HDFS客户端打开outputstream:</strong></p><ul><li>5.向DataNode1提交请求,建立Block传输通道,DataNode之间层层传递直到最后一个DataNode3.</li><li>6.DataNode3返回同意,在层层同意之后返回FSDataOutputStream</li><li>7.然后开始以Packet(64k)为单位传递给DataNode</li><li>1.DataNode内部,数据是在ByteBuffer里不断流动给下一个DataNode的,与此同时,又会持久化于本地磁盘.</li><li>2.Packet每次传递后,节点都会逐层给与应答,只有当都成功了后,才会给与下一个Packet,否则再次传递.</li><li>3.Packet是由(chunk512byte+chunksum4byte(校验位))攒够64K形成的.<br>&emsp;提一下,在HDFS客户端开启FSDataOutputstra之前,会先创建一个这个缓冲队列,这个队列就是用来慢慢形成一个个的Packet.</li><li>传递完成后给与NameNode反馈</li></ul><p><img src="/2021/11/22/hadoop/HDFS%E5%86%99%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B.png" alt="HDFS写流程图"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> hadoop </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hadoop </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>office安装</title>
       <link href="/2021/11/22/office/"/>
       <url>/2021/11/22/office/</url>
