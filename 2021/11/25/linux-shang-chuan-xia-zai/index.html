@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="hdfs,yarn">
+    <meta name="keywords" content="lrzsz">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>hadoop中 hdfs,yarn..等等流程图及解析 | tzkTangXS</title>
+    <title>linux上传下载 | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">hadoop中 hdfs,yarn..等等流程图及解析</h1>
+                    <h1 class="description center-align post-title">linux上传下载</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/hadoop/">
-                                <span class="chip bg-color">hadoop</span>
+                            <a href="/tags/linux/">
+                                <span class="chip bg-color">linux</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/hadoop/" class="post-category">
-                                hadoop
+                            <a href="/categories/linux/" class="post-category">
+                                linux
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-22
+                    2021-11-25
                 </div>
                 
 
@@ -465,7 +465,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    335
+                    100
                 </div>
                 
 
@@ -495,26 +495,22 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="hadoop中-hdfs-yarn-等等流程图"><a href="#hadoop中-hdfs-yarn-等等流程图" class="headerlink" title="hadoop中 hdfs,yarn..等等流程图"></a>hadoop中 hdfs,yarn..等等流程图</h2><h3 id="HDFS写流程图"><a href="#HDFS写流程图" class="headerlink" title="HDFS写流程图:"></a>HDFS写流程图:</h3><h4 id="文字解说"><a href="#文字解说" class="headerlink" title="文字解说:"></a>文字解说:</h4><p><strong>HDFS客户端创建分布式文件系统:</strong></p>
-<ul>
-<li>1.向NameNode提交在HDFS上创建文件的申请.</li>
-<li>DataNode核对:<br>是否拥有权限(是)<br>是否才在此文件(否)</li>
-<li>2.满足条件后,NameNode返回同意响应.</li>
-<li>3.向NameNode提交上传第一个块的请求</li>
-<li>4.NameNode返回用于存储该块的DataNode</li>
-<li>选取策略:<br>本地节点<br>其他机架上的节点<br>其他机架上的不通节点</li>
+                <h1 id="linux文件上传下载使用lrzsz"><a href="#linux文件上传下载使用lrzsz" class="headerlink" title="linux文件上传下载使用lrzsz"></a>linux文件上传下载使用lrzsz</h1><h2 id="先安装这个工具"><a href="#先安装这个工具" class="headerlink" title="先安装这个工具"></a>先安装这个工具</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yum <span class="token function">install</span> -y lrzsz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><ul>
+<li><p>单文件下载</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sz filename<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>之后他会弹出GUI,点点点就行了</p>
+</li>
+<li><p>多文件下载</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sz filename,filename<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>下载目录下所有文件</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sz d/*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
-<p><strong>收到消息后,HDFS客户端打开outputstream:</strong></p>
-<ul>
-<li>5.向DataNode1提交请求,建立Block传输通道,DataNode之间层层传递直到最后一个DataNode3.</li>
-<li>6.DataNode3返回同意,在层层同意之后返回FSDataOutputStream</li>
-<li>7.然后开始以Packet(64k)为单位传递给DataNode</li>
-<li>1.DataNode内部,数据是在ByteBuffer里不断流动给下一个DataNode的,与此同时,又会持久化于本地磁盘.</li>
-<li>2.Packet每次传递后,节点都会逐层给与应答,只有当都成功了后,才会给与下一个Packet,否则再次传递.</li>
-<li>3.Packet是由(chunk512byte+chunksum4byte(校验位))攒够64K形成的.<br>&emsp;提一下,在HDFS客户端开启FSDataOutputstra之前,会先创建一个这个缓冲队列,这个队列就是用来慢慢形成一个个的Packet.</li>
-<li>传递完成后给与NameNode反馈</li>
+<h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><ul>
+<li>统一操作<br>跳转到你想要的存放文件的linux目录下,使用如下命令<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">rz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+之后在GUI上操做就行.</li>
 </ul>
-<p><img src="/2021/11/22/hadoop/HDFS%E5%86%99%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B.png" alt="HDFS写流程图"></p>
 
                 
             </div>
@@ -541,7 +537,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2021/11/22/hadoop/">http://tzktangxs.github.io/2021/11/22/hadoop/</a>
+                    <a href="http://tzktangxs.github.io/2021/11/25/linux-shang-chuan-xia-zai/">http://tzktangxs.github.io/2021/11/25/linux-shang-chuan-xia-zai/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -579,8 +575,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/hadoop/">
-                                    <span class="chip bg-color">hadoop</span>
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
                                 </a>
                             
                         </div>
@@ -750,9 +746,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/11/25/linux-shang-chuan-xia-zai/">
                     <div class="card-image">
@@ -770,9 +767,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -785,6 +782,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -803,13 +801,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/22/office/">
+                <a href="/2021/11/22/hadoop/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="office安装">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="hadoop中 hdfs,yarn..等等流程图及解析">
                         
-                        <span class="card-title">office安装</span>
+                        <span class="card-title">hadoop中 hdfs,yarn..等等流程图及解析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -826,13 +824,21 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/office/" class="post-category">
-                                    office
+                            <a href="/categories/hadoop/" class="post-category">
+                                    hadoop
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/hadoop/">
+                        <span class="chip bg-color">hadoop</span>
+                    </a>
+                    
                 </div>
                 
             </div>
