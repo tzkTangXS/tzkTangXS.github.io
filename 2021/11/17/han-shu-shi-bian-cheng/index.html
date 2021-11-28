@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="udtf">
+    <meta name="keywords" content="Scala,lambda">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>UDTF原理 | tzkTangXS</title>
+    <title>函数式编程 | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">UDTF原理</h1>
+                    <h1 class="description center-align post-title">函数式编程</h1>
                 </div>
             </div>
         </div>
@@ -431,12 +431,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/hive/">
-                                <span class="chip bg-color">hive</span>
+                            <a href="/tags/Scala/">
+                                <span class="chip bg-color">Scala</span>
                             </a>
                         
-                            <a href="/tags/udtf/">
-                                <span class="chip bg-color">udtf</span>
+                            <a href="/tags/lambda/">
+                                <span class="chip bg-color">lambda</span>
                             </a>
                         
                     </div>
@@ -447,8 +447,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/hive/" class="post-category">
-                                hive
+                            <a href="/categories/Scala/" class="post-category">
+                                Scala
                             </a>
                         
                     </div>
@@ -460,7 +460,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-16
+                    2021-11-17
                 </div>
                 
 
@@ -469,7 +469,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    69
+                    284
                 </div>
                 
 
@@ -499,12 +499,20 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="原理解释"><a href="#原理解释" class="headerlink" title="原理解释"></a>原理解释</h2><p>Hive 的每一个sql会被解释成一个个的operator组成operators,<br>数据放在java中的object中,<br>数据类型放在object inspector中<br>在oprator之间传递.</p>
-<blockquote>
-<p>edit:<br>(object inspector提供了用以解析保存在object中的数据的方法)</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/b45be8e0b8894b7c97973d2b0769f95c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5oiR5piv5aW95Lq65aSn5oCq5YW9,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="这是从我的csdn引用的"><br><img src="/2021/11/16/udtf/udtf.png" alt="这是安装插件后,从相对路径引用的"><br><a target="_blank" rel="noopener" href="https://f60bec40.wiz06.com/wapp/pages/view/share/s/3S2-N02Et17F2tGvlH3MdUWD0HjvNV08rABS2UL3b20OfkF7">我的为知笔记</a></p>
+                <p>先来看一下,下面的函数定义:</p>
+<pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"><span class="token keyword">def</span> f<span class="token punctuation">(</span>x<span class="token operator">:</span><span class="token builtin">Int</span><span class="token punctuation">)</span> <span class="token operator">=</span> x<span class="token operator">*</span><span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>是不是很像数学上的f(x)= 表达式<br>没错,这就是函数式变成,它所在意的是<strong>自变量</strong>和<strong>因变量</strong>之间的<strong>映射关系</strong>.</p>
+<pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"><span class="token builtin">Int</span> <span class="token keyword">=></span> <span class="token builtin">Int</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>也就是数学上的函数,所以才有了以上的写法.这样只学了数学的人就会相对容易的上手.<br>由于数学上的函数,相对是定死的(对于自变量x有且仅有唯一的一个f(x)值与之对应 ).不会有变化.该是怎么样的曲线便是什么样的曲线.<br>而,在分布式系统上需要的就是这样的稳定性.一拍即合.<br>它天生便适合大数据,或者说为大数据而生也不为过.</p>
+<h2 id="函数致简原则"><a href="#函数致简原则" class="headerlink" title="函数致简原则"></a>函数致简原则</h2><p>记住一点就够了:当参数在=&gt;右边只出现一次,用_替代即可<br>其他的就按照能省既省原则即可<br>example</p>
+<pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"><span class="token keyword">def</span> f<span class="token punctuation">(</span>name<span class="token operator">:</span><span class="token builtin">String</span><span class="token punctuation">)</span> <span class="token operator">=</span> name<span class="token operator">+</span><span class="token string">"一点信仰!!!"</span>
+<span class="token comment">// name:String => name+"一点信仰!!!"</span>
+<span class="token comment">// _ + "一点信仰!!!"</span>
+<span class="token keyword">def</span> f2<span class="token punctuation">(</span>fn<span class="token operator">:</span> <span class="token builtin">String</span> <span class="token keyword">=></span> <span class="token builtin">String</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	fn<span class="token punctuation">(</span><span class="token string">"小明"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
 
+f2<span class="token punctuation">(</span>_<span class="token operator">+</span><span class="token string">"一点信仰!!!"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -530,7 +538,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2021/11/16/udtf/">http://tzktangxs.github.io/2021/11/16/udtf/</a>
+                    <a href="http://tzktangxs.github.io/2021/11/17/han-shu-shi-bian-cheng/">http://tzktangxs.github.io/2021/11/17/han-shu-shi-bian-cheng/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -568,12 +576,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/hive/">
-                                    <span class="chip bg-color">hive</span>
+                                <a href="/tags/Scala/">
+                                    <span class="chip bg-color">Scala</span>
                                 </a>
                             
-                                <a href="/tags/udtf/">
-                                    <span class="chip bg-color">udtf</span>
+                                <a href="/tags/lambda/">
+                                    <span class="chip bg-color">lambda</span>
                                 </a>
                             
                         </div>
@@ -747,13 +755,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/11/17/git-chang-gui-zhi-ling/">
+                <a href="/2021/11/17/dql-pai-xu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="git常规指令">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="DQL-排序">
                         
-                        <span class="card-title">git常规指令</span>
+                        <span class="card-title">DQL-排序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -770,8 +778,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/git/" class="post-category">
-                                    git
+                            <a href="/categories/hive/" class="post-category">
+                                    hive
                                 </a>
                             
                             
@@ -781,8 +789,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/git/">
-                        <span class="chip bg-color">git</span>
+                    <a href="/tags/DQL/">
+                        <span class="chip bg-color">DQL</span>
+                    </a>
+                    
+                    <a href="/tags/hive/">
+                        <span class="chip bg-color">hive</span>
                     </a>
                     
                 </div>
@@ -796,13 +808,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/16/ebdw-testandoptimize/">
+                <a href="/2021/11/17/kai-tian-chuang-yu-fou-de-qu-bie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="电商数仓-测试与优化">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="开天窗与否的区别">
                         
-                        <span class="card-title">电商数仓-测试与优化</span>
+                        <span class="card-title">开天窗与否的区别</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -813,18 +825,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Data-Warehouse/" class="post-category">
-                                    Data Warehouse
-                                </a>
-                            
-                            <a href="/categories/Data-Warehouse/bigdata/" class="post-category">
-                                    bigdata
+                            <a href="/categories/hive/" class="post-category">
+                                    hive
                                 </a>
                             
                             
@@ -834,8 +842,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Data-Warehouse/">
-                        <span class="chip bg-color">Data Warehouse</span>
+                    <a href="/tags/hive/">
+                        <span class="chip bg-color">hive</span>
+                    </a>
+                    
+                    <a href="/tags/over/">
+                        <span class="chip bg-color">over()</span>
                     </a>
                     
                 </div>
