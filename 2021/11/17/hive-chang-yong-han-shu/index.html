@@ -469,7 +469,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    395
+                    422
                 </div>
                 
 
@@ -499,7 +499,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>#nvl<br>select nvl(salary,0) from emp;<br>#时间函数<br>select date_format(‘2017-3-4’,’yyyy-mm-dd HH:mm:ss’);</p>
+                <h1 id="nvl"><a href="#nvl" class="headerlink" title="nvl"></a>nvl</h1><p>select nvl(salary,0) from emp;</p>
+<h1 id="coalesce"><a href="#coalesce" class="headerlink" title="coalesce"></a>coalesce</h1><p>coalesce(a,b,c,’ddd’)<br>解析:</p>
+<pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"><span class="token comment">// scala</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	a
+<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>b <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	b
+<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>c <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	c
+<span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token string">'ddd'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>#时间函数<br>select date_format(‘2017-3-4’,’yyyy-mm-dd HH:mm:ss’);</p>
 <ul>
 <li><p>   select date_add(‘2017-6-29’,4);<br>terminal: 2017-7-3</p>
 </li>
@@ -513,12 +523,20 @@
 </li>
 </ul>
 <h1 id><a href="#" class="headerlink" title></a></h1><p>select sum(case sex when ‘男’  then 1 else 0 end) male_count,<br>sum(case sex when ‘女’ then 1 else 0 end) female_count<br>from emp group by deptno order by deptno;</p>
-<p>#concat//行转列<br>##第一步 t1<br>select concat_sw(‘,’,xz,xx) xz_xx<br>from<br>emp;<br>##第二步t2<br>select<br>t1.xz_xx, concat_sw(‘|’,collect_set(t1.name))<br>from t1<br>group by t1.xz_xx;<br>##第三步:整合<br>select<br>t1.xz_xx, concat_sw(‘|’,collect_set(t1.name))<br>from<br>(<br>select concat_sw(‘,’,xz,xx) xz_xx<br>from<br>emp;<br>)    t1<br>group by t1.xz_xx;<br>#列转行<br>##explode 将hive中复杂的array 或 map 拆分<br>###example<br>create table if not exists movie_info(<br>movie_name string,<br>category array<string><br>)<br>row format delimited fields terminated by ‘\t’<br>collection items terminated by ‘,’</string></p>
+<h1 id="concat-行转列"><a href="#concat-行转列" class="headerlink" title="concat//行转列"></a>concat//行转列</h1><h2 id="第一步-t1"><a href="#第一步-t1" class="headerlink" title="第一步 t1"></a>第一步 t1</h2><p>select concat_sw(‘,’,xz,xx) xz_xx<br>from<br>emp;</p>
+<h2 id="第二步t2"><a href="#第二步t2" class="headerlink" title="第二步t2"></a>第二步t2</h2><p>select<br>t1.xz_xx, concat_sw(‘|’,collect_set(t1.name))<br>from t1<br>group by t1.xz_xx;</p>
+<h2 id="第三步-整合"><a href="#第三步-整合" class="headerlink" title="第三步:整合"></a>第三步:整合</h2><p>select<br>t1.xz_xx, concat_sw(‘|’,collect_set(t1.name))<br>from<br>(<br>select concat_sw(‘,’,xz,xx) xz_xx<br>from<br>emp;<br>)    t1<br>group by t1.xz_xx;</p>
+<h1 id="列转行"><a href="#列转行" class="headerlink" title="列转行"></a>列转行</h1><h2 id="explode-将hive中复杂的array-或-map-拆分"><a href="#explode-将hive中复杂的array-或-map-拆分" class="headerlink" title="explode 将hive中复杂的array 或 map 拆分"></a>explode 将hive中复杂的array 或 map 拆分</h2><h3 id="example"><a href="#example" class="headerlink" title="example"></a>example</h3><p>create table if not exists movie_info(<br>movie_name string,<br>category array<string><br>)<br>row format delimited fields terminated by ‘\t’<br>collection items terminated by ‘,’</string></p>
 <p>load data local inpath ‘/opt/module/datas/movie.txt’ into table into movie_info;</p>
 <p>select<br>movie,<br>category_name<br>from<br>movie_info lateral view explode(category) table_tmp as category_name;</p>
-<p>select<br>movie_name,<br>category_name<br>from<br>movie_info cateral view explode(category) table_tmp as catgory_name;<br>#窗口函数<br>##over():<br>指定分析函数工作窗口大小，随着行变化<br>####current row<br>####n preceding:    向前移动n行<br>####n following:    向后移动N行<br>####unbounded    启点<br>unbounded preceding<br>unbounded following<br>##lag(col,n);<br>##lead(col,n);<br>#ntile(n)    把有序分区的行分发到指定数据的组中，各个组有编号，编号从1开始。对于每一个ntile返回此行所属的组的编号。<br>create table if not exists business(<br>name string,<br>order_date date,<br>cost double<br>)<br>row format delimited fields terminated by ‘,’</p>
-<p>load data local inpath ‘/opt/module/data/business’<br>into table business;<br>##查询2017-04购买过商品的顾客及总人数<br>select name,count(*) over()<br>from business<br>where substring(orderdate,1,7) = ‘2017-04’<br>group by name;<br>##查询顾客购买明细，及月购买总额。<br>select *,sum(cost) over(partitioned by month(order_date))<br>from<br>business;</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title></a></h2>
+<p>select<br>movie_name,<br>category_name<br>from<br>movie_info cateral view explode(category) table_tmp as catgory_name;</p>
+<h1 id="窗口函数"><a href="#窗口函数" class="headerlink" title="窗口函数"></a>窗口函数</h1><h2 id="over"><a href="#over" class="headerlink" title="over():"></a>over():</h2><p>指定分析函数工作窗口大小，随着行变化</p>
+<h4 id="current-row"><a href="#current-row" class="headerlink" title="current row"></a>current row</h4><h4 id="n-preceding-向前移动n行"><a href="#n-preceding-向前移动n行" class="headerlink" title="n preceding:    向前移动n行"></a>n preceding:    向前移动n行</h4><h4 id="n-following-向后移动N行"><a href="#n-following-向后移动N行" class="headerlink" title="n following:    向后移动N行"></a>n following:    向后移动N行</h4><h4 id="unbounded-启点"><a href="#unbounded-启点" class="headerlink" title="unbounded    启点"></a>unbounded    启点</h4><p>unbounded preceding<br>unbounded following</p>
+<h2 id="lag-col-n"><a href="#lag-col-n" class="headerlink" title="lag(col,n);"></a>lag(col,n);</h2><h2 id="lead-col-n"><a href="#lead-col-n" class="headerlink" title="lead(col,n);"></a>lead(col,n);</h2><h1 id="ntile-n-把有序分区的行分发到指定数据的组中，各个组有编号，编号从1开始。对于每一个ntile返回此行所属的组的编号。"><a href="#ntile-n-把有序分区的行分发到指定数据的组中，各个组有编号，编号从1开始。对于每一个ntile返回此行所属的组的编号。" class="headerlink" title="ntile(n)    把有序分区的行分发到指定数据的组中，各个组有编号，编号从1开始。对于每一个ntile返回此行所属的组的编号。"></a>ntile(n)    把有序分区的行分发到指定数据的组中，各个组有编号，编号从1开始。对于每一个ntile返回此行所属的组的编号。</h1><p>create table if not exists business(<br>name string,<br>order_date date,<br>cost double<br>)<br>row format delimited fields terminated by ‘,’</p>
+<p>load data local inpath ‘/opt/module/data/business’<br>into table business;</p>
+<h2 id="查询2017-04购买过商品的顾客及总人数"><a href="#查询2017-04购买过商品的顾客及总人数" class="headerlink" title="查询2017-04购买过商品的顾客及总人数"></a>查询2017-04购买过商品的顾客及总人数</h2><p>select name,count(*) over()<br>from business<br>where substring(orderdate,1,7) = ‘2017-04’<br>group by name;</p>
+<h2 id="查询顾客购买明细，及月购买总额。"><a href="#查询顾客购买明细，及月购买总额。" class="headerlink" title="查询顾客购买明细，及月购买总额。"></a>查询顾客购买明细，及月购买总额。</h2><p>select *,sum(cost) over(partitioned by month(order_date))<br>from<br>business;</p>
+
                 
             </div>
             <hr/>
@@ -544,7 +562,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2021/11/17/chang-yong-han-shu/">http://tzktangxs.github.io/2021/11/17/chang-yong-han-shu/</a>
+                    <a href="http://tzktangxs.github.io/2021/11/17/hive-chang-yong-han-shu/">http://tzktangxs.github.io/2021/11/17/hive-chang-yong-han-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1052,7 +1070,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">20k</span>&nbsp;字
+                class="white-color">20.1k</span>&nbsp;字
             
             
             
