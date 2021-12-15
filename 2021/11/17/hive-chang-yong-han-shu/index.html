@@ -469,7 +469,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    871
+                    872
                 </div>
                 
 
@@ -520,18 +520,17 @@
 <span class="token comment">-- 将is_new字段放入set中去重,然后判断是否存在'0',如果存在则返回true,否者返回false</span>
 <span class="token keyword">if</span><span class="token punctuation">(</span>array_contains<span class="token punctuation">(</span>collect_set<span class="token punctuation">(</span>is_new<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'0'</span><span class="token punctuation">,</span><span class="token string">'1'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="将数据放入结构体中"><a href="#将数据放入结构体中" class="headerlink" title="将数据放入结构体中"></a>将数据放入结构体中</h2><p><em><strong>named_struct</strong></em></p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">with</span>
-t1 <span class="token keyword">as</span>
-<span class="token punctuation">(</span><span class="token keyword">select</span> mid_id<span class="token punctuation">,</span>
-       page_id<span class="token punctuation">,</span>
-       <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> page_count<span class="token punctuation">,</span>
-       <span class="token function">sum</span><span class="token punctuation">(</span>during_time<span class="token punctuation">)</span> during_time
-<span class="token keyword">from</span> dwd_page_log
-<span class="token keyword">where</span> dt <span class="token operator">=</span> <span class="token string">'2020-06-14'</span>
-<span class="token keyword">group</span> <span class="token keyword">by</span> mid_id<span class="token punctuation">,</span> page_id<span class="token punctuation">)</span>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">with</span> t1 <span class="token keyword">as</span>
+         <span class="token punctuation">(</span><span class="token keyword">select</span> mid_id<span class="token punctuation">,</span>
+                 page_id<span class="token punctuation">,</span>
+                 <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>         page_count<span class="token punctuation">,</span>
+                 <span class="token function">sum</span><span class="token punctuation">(</span>during_time<span class="token punctuation">)</span> during_time
+          <span class="token keyword">from</span> dwd_page_log
+          <span class="token keyword">where</span> dt <span class="token operator">=</span> <span class="token string">'2020-06-14'</span>
+          <span class="token keyword">group</span> <span class="token keyword">by</span> mid_id<span class="token punctuation">,</span> page_id<span class="token punctuation">)</span>
 <span class="token keyword">select</span> mid_id<span class="token punctuation">,</span>
-       named_struct<span class="token punctuation">(</span><span class="token string">'page_id'</span><span class="token punctuation">,</span>page_id<span class="token punctuation">,</span><span class="token string">'page_count'</span><span class="token punctuation">,</span>page_count<span class="token punctuation">,</span><span class="token string">'during_time'</span><span class="token punctuation">,</span>during_time<span class="token punctuation">)</span>
-<span class="token keyword">from</span> t1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+       collect_set<span class="token punctuation">(</span>named_struct<span class="token punctuation">(</span><span class="token string">'page_id'</span><span class="token punctuation">,</span> page_id<span class="token punctuation">,</span> <span class="token string">'page_count'</span><span class="token punctuation">,</span> page_count<span class="token punctuation">,</span> <span class="token string">'during_time'</span><span class="token punctuation">,</span> during_time<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">from</span> t1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h1><ul>
 <li>select date_format(‘2017-3-4’,’yyyy-mm-dd HH:mm:ss’);</li>
