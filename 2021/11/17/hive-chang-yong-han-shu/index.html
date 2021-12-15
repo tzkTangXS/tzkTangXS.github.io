@@ -469,7 +469,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    828
+                    871
                 </div>
                 
 
@@ -499,7 +499,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="判空"><a href="#判空" class="headerlink" title="判空"></a>判空</h1><h2 id="nvl"><a href="#nvl" class="headerlink" title="nvl"></a>nvl</h2><p>select nvl(salary,0) from emp;</p>
+                <h1 id="判空"><a href="#判空" class="headerlink" title="判空"></a>判空</h1><h2 id="nvl"><a href="#nvl" class="headerlink" title="nvl"></a>nvl</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> nvl<span class="token punctuation">(</span>salary<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">from</span> emp<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="coalesce"><a href="#coalesce" class="headerlink" title="coalesce"></a>coalesce</h2><p>coalesce(a,b,c,’ddd’)<br>解析:</p>
 <pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"><span class="token comment">// scala</span>
 <span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -509,29 +509,40 @@
 <span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>c <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	c
 <span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token string">'ddd'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="对集合的操作"><a href="#对集合的操作" class="headerlink" title="对集合的操作"></a>对集合的操作</h1><h2 id="将String-转换成Map"><a href="#将String-转换成Map" class="headerlink" title="将String 转换成Map"></a>将String 转换成Map</h2><p>str_to_map()<br>str_to_map(text,delimited1,delimited2)<br>解析:<br>delimited1是kv kv kv 之间的分隔符<br>delimited2是k与v之间的分隔符</p>
+<h1 id="对集合的操作"><a href="#对集合的操作" class="headerlink" title="对集合的操作"></a>对集合的操作</h1><h2 id="将String-转换成Map"><a href="#将String-转换成Map" class="headerlink" title="将String 转换成Map"></a>将String 转换成Map</h2><p>str_to_map()</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">str_to_map<span class="token punctuation">(</span><span class="token keyword">text</span><span class="token punctuation">,</span>delimited1<span class="token punctuation">,</span>delimited2<span class="token punctuation">)</span>
+<span class="token comment">-- 解析:</span>
+<span class="token comment">-- delimited1是kv kv kv 之间的分隔符</span>
+<span class="token comment">-- delimited2是k与v之间的分隔符</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="判断集合中是否包含某元素"><a href="#判断集合中是否包含某元素" class="headerlink" title="判断集合中是否包含某元素"></a>判断集合中是否包含某元素</h2><p>array_contains()</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 这是数仓项目中,对于DWS层访客用户表的装载语句中的一个条件判断</span>
 <span class="token comment">-- 判断是否为新增访客</span>
 <span class="token comment">-- 将is_new字段放入set中去重,然后判断是否存在'0',如果存在则返回true,否者返回false</span>
 <span class="token keyword">if</span><span class="token punctuation">(</span>array_contains<span class="token punctuation">(</span>collect_set<span class="token punctuation">(</span>is_new<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'0'</span><span class="token punctuation">,</span><span class="token string">'1'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="将数据放入结构体中"><a href="#将数据放入结构体中" class="headerlink" title="将数据放入结构体中"></a>将数据放入结构体中</h2><p><em><strong>named_struct</strong></em></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">with</span>
+t1 <span class="token keyword">as</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> mid_id<span class="token punctuation">,</span>
+       page_id<span class="token punctuation">,</span>
+       <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> page_count<span class="token punctuation">,</span>
+       <span class="token function">sum</span><span class="token punctuation">(</span>during_time<span class="token punctuation">)</span> during_time
+<span class="token keyword">from</span> dwd_page_log
+<span class="token keyword">where</span> dt <span class="token operator">=</span> <span class="token string">'2020-06-14'</span>
+<span class="token keyword">group</span> <span class="token keyword">by</span> mid_id<span class="token punctuation">,</span> page_id<span class="token punctuation">)</span>
+<span class="token keyword">select</span> mid_id<span class="token punctuation">,</span>
+       named_struct<span class="token punctuation">(</span><span class="token string">'page_id'</span><span class="token punctuation">,</span>page_id<span class="token punctuation">,</span><span class="token string">'page_count'</span><span class="token punctuation">,</span>page_count<span class="token punctuation">,</span><span class="token string">'during_time'</span><span class="token punctuation">,</span>during_time<span class="token punctuation">)</span>
+<span class="token keyword">from</span> t1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h1><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> date_format<span class="token punctuation">(</span><span class="token string">'2017-3-4'</span><span class="token punctuation">,</span><span class="token string">'yyyy-mm-dd HH:mm:ss'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">*</span>    <span class="token keyword">select</span> date_add<span class="token punctuation">(</span><span class="token string">'2017-6-29'</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-terminal: <span class="token number">2017</span><span class="token operator">-</span><span class="token number">7</span><span class="token operator">-</span><span class="token number">3</span>
-<span class="token operator">*</span>    <span class="token keyword">select</span> date_add<span class="token punctuation">(</span><span class="token string">'2017-6-27'</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-terminal: <span class="token number">2017</span><span class="token operator">-</span><span class="token number">6</span><span class="token operator">-</span><span class="token number">23</span>
-<span class="token operator">*</span>    <span class="token keyword">select</span> datediff<span class="token punctuation">(</span><span class="token string">'2017-7-3'</span><span class="token punctuation">,</span><span class="token string">'2017-6-29'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-terminal: <span class="token number">4</span>
-<span class="token operator">*</span>    <span class="token keyword">select</span> datediff<span class="token punctuation">(</span><span class="token string">'2017-6-29'</span><span class="token punctuation">,</span><span class="token string">'2017-7-3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-terminal: <span class="token operator">-</span><span class="token number">4</span>
-<span class="token operator">*</span> <span class="token keyword">select</span> next_day<span class="token punctuation">(</span><span class="token string">'2020-06-14'</span><span class="token punctuation">,</span><span class="token string">'MO'</span><span class="token punctuation">)</span>
-返回下一周周一的日期
-<span class="token operator">*</span> <span class="token keyword">select</span> date_add<span class="token punctuation">(</span>next_day<span class="token punctuation">(</span><span class="token string">'2020-06-14'</span><span class="token punctuation">,</span><span class="token string">'MO'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-当前周周一的日期
-<span class="token operator">*</span>    <span class="token keyword">select</span> regexp_replace<span class="token punctuation">(</span><span class="token string">'2019/07/03'</span><span class="token punctuation">,</span><span class="token string">'/'</span><span class="token punctuation">,</span><span class="token string">'-'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-terminal: <span class="token number">2019</span><span class="token operator">-</span><span class="token number">07</span><span class="token operator">-</span><span class="token number">03</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<h1 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h1><ul>
+<li>select date_format(‘2017-3-4’,’yyyy-mm-dd HH:mm:ss’);</li>
+<li>   select date_add(‘2017-6-29’,4);<br>terminal: 2017-7-3</li>
+<li>   select date_add(‘2017-6-27’,-4);<br>terminal: 2017-6-23</li>
+<li>   select datediff(‘2017-7-3’,’2017-6-29’);<br>terminal: 4</li>
+<li>   select datediff(‘2017-6-29’,’2017-7-3’);<br>terminal: -4</li>
+<li>select next_day(‘2020-06-14’,’MO’)<br>返回下一周周一的日期</li>
+<li>select date_add(next_day(‘2020-06-14’,’MO’),-7);<br>当前周周一的日期</li>
+<li>   select regexp_replace(‘2019/07/03’,’/‘,’-‘);<br>terminal: 2019-07-03</li>
+</ul>
 <h1 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h1><h2 id="case语句"><a href="#case语句" class="headerlink" title="case语句"></a>case语句</h2><p><em><strong>case when then else end</strong></em></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 格式:</span>
 <span class="token keyword">case</span>
@@ -960,12 +971,12 @@ business<span class="token punctuation">;</span><span aria-hidden="true" class="
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/hive/">
-                        <span class="chip bg-color">hive</span>
-                    </a>
-                    
                     <a href="/tags/DQL/">
                         <span class="chip bg-color">DQL</span>
+                    </a>
+                    
+                    <a href="/tags/hive/">
+                        <span class="chip bg-color">hive</span>
                     </a>
                     
                 </div>
@@ -1168,7 +1179,7 @@ business<span class="token punctuation">;</span><span aria-hidden="true" class="
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">20.4k</span>&nbsp;字
+                class="white-color">20.5k</span>&nbsp;字
             
             
             
