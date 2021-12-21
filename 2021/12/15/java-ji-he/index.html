@@ -465,14 +465,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    290
+                    533
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -559,6 +559,15 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">list<span class="token punctuation">.</span><span class="token function">subList</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><h4 id="源码解析图"><a href="#源码解析图" class="headerlink" title="源码解析图"></a>源码解析图</h4><p><img src="/2021/12/15/java-ji-he/ArrayList%E8%A7%A3%E6%9E%90%E5%9B%BE.png" alt="ArrayList源码解析图"></p>
+<ul>
+<li><strong>特点:</strong></li>
+</ul>
+<p>1.<em><strong>底层为数组Array</strong></em><br>2.<em><strong>线程不安全</strong></em><br>3.<em><strong>采用无参构造创建时:</strong></em><br>不初始化,对象引用啥也不指向;只有当进行添加元素时,才会采取按照默认值初始化数组,然后返回给对象引用.<br>4.<em><strong>如果使用带参构造:</strong></em><br>那么照设定值进行数组初始化(但是如果参数设定为0,那么走无参路线).<br>5.<em><strong>扩容方式:</strong></em><br>按照oldCapacity + (oldCapacity &gt;&gt; 1)的方式扩容.即:按照一点五倍扩容.</p>
+<h3 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h3><h4 id="源码解析图-1"><a href="#源码解析图-1" class="headerlink" title="源码解析图"></a>源码解析图</h4><p><img src="/2021/12/15/java-ji-he/Vector%E8%A7%A3%E6%9E%90%E5%9B%BE.png" alt="Vector解析图"></p>
+<ul>
+<li><strong>特点:</strong></li>
+</ul>
+<p>1.<em><strong>底层为数组Array</strong></em><br>2.<em><strong>线程安全</strong></em><br>3.<em><strong>采用无参构造创建时:</strong></em><br>那么照默认值进行数组初始化<br>4.<em><strong>如果使用带参构造:</strong></em><br>那么照设定值进行数组初始化,除此之外,还可以设定增量.<br>5.<em><strong>扩容方式:</strong></em><br>按照oldCapacity + (capacityIncrement &gt; 0? capacityIncrement:oldCapacity)的方式扩容.即:有增量,按增量,否者按照2倍扩容</p>
 
                 
             </div>
@@ -1087,7 +1096,7 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">20.8k</span>&nbsp;字
+                class="white-color">21k</span>&nbsp;字
             
             
             
