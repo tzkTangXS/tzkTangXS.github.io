@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>idea常用快捷键</title>
+      <link href="/2022/01/18/idea-chang-yong-kuai-jie-jian/"/>
+      <url>/2022/01/18/idea-chang-yong-kuai-jie-jian/</url>
+      
+        <content type="html"><![CDATA[<h2 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h2><p>所有使用到当前变量的地方</p><pre class="line-numbers language-none"><code class="language-none">shitf + F6<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="To-replace-letter-in-totally-page"><a href="#To-replace-letter-in-totally-page" class="headerlink" title="To replace letter in totally page"></a>To replace letter in totally page</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+f<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="快速生成对象引用"><a href="#快速生成对象引用" class="headerlink" title="快速生成对象引用"></a>快速生成对象引用</h2><pre class="line-numbers language-none"><code class="language-none">alt+Enter<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="打开文件记录-默认上一页"><a href="#打开文件记录-默认上一页" class="headerlink" title="打开文件记录(默认上一页)"></a>打开文件记录(默认上一页)</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+table<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="代码格式化"><a href="#代码格式化" class="headerlink" title="代码格式化"></a>代码格式化</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+shift+F<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="提示参数类型"><a href="#提示参数类型" class="headerlink" title="提示参数类型"></a>提示参数类型</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+alt+&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="查看某个包下的类容"><a href="#查看某个包下的类容" class="headerlink" title="查看某个包下的类容"></a>查看某个包下的类容</h2><h3 id="以-scala-io包为例"><a href="#以-scala-io包为例" class="headerlink" title="以 scala.io包为例"></a>以 scala.io包为例</h3><pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"><span class="token comment">//先输入</span>scala<span class="token punctuation">.</span>io<span class="token punctuation">.</span>stdIn<span class="token comment">//然后光标移动到io,并按住 ctrl + B</span><span class="token comment">//这样左侧就会出现目录</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> idea </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>手撕java集合</title>
       <link href="/2021/12/15/java-ji-he/"/>
       <url>/2021/12/15/java-ji-he/</url>
@@ -625,31 +650,6 @@
         <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
       
       
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>idea常用快捷键</title>
-      <link href="/2020/01/18/idea-chang-yong-kuai-jie-jian/"/>
-      <url>/2020/01/18/idea-chang-yong-kuai-jie-jian/</url>
-      
-        <content type="html"><![CDATA[<h2 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h2><p>所有使用到当前变量的地方</p><pre class="line-numbers language-none"><code class="language-none">shitf + F6<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="To-replace-letter-in-totally-page"><a href="#To-replace-letter-in-totally-page" class="headerlink" title="To replace letter in totally page"></a>To replace letter in totally page</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+f<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="快速生成对象引用"><a href="#快速生成对象引用" class="headerlink" title="快速生成对象引用"></a>快速生成对象引用</h2><pre class="line-numbers language-none"><code class="language-none">alt+Enter<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="打开文件记录-默认上一页"><a href="#打开文件记录-默认上一页" class="headerlink" title="打开文件记录(默认上一页)"></a>打开文件记录(默认上一页)</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+table<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="代码格式化"><a href="#代码格式化" class="headerlink" title="代码格式化"></a>代码格式化</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+shift+F<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="提示参数类型"><a href="#提示参数类型" class="headerlink" title="提示参数类型"></a>提示参数类型</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+alt+&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="查看某个包下的类容"><a href="#查看某个包下的类容" class="headerlink" title="查看某个包下的类容"></a>查看某个包下的类容</h2><h3 id="以-scala-io包为例"><a href="#以-scala-io包为例" class="headerlink" title="以 scala.io包为例"></a>以 scala.io包为例</h3><pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"><span class="token comment">//先输入</span>scala<span class="token punctuation">.</span>io<span class="token punctuation">.</span>stdIn<span class="token comment">//然后光标移动到io,并按住 ctrl + B</span><span class="token comment">//这样左侧就会出现目录</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> idea </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> idea </tag>
-            
-        </tags>
       
     </entry>
     
