@@ -629,6 +629,31 @@
     </entry>
     
     
+    
+    <entry>
+      <title>idea常用快捷键</title>
+      <link href="/2020/01/18/idea-chang-yong-kuai-jie-jian/"/>
+      <url>/2020/01/18/idea-chang-yong-kuai-jie-jian/</url>
+      
+        <content type="html"><![CDATA[<h2 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h2><p>所有使用到当前变量的地方</p><pre class="line-numbers language-none"><code class="language-none">shitf + F6<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="To-replace-letter-in-totally-page"><a href="#To-replace-letter-in-totally-page" class="headerlink" title="To replace letter in totally page"></a>To replace letter in totally page</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+f<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="快速生成对象引用"><a href="#快速生成对象引用" class="headerlink" title="快速生成对象引用"></a>快速生成对象引用</h2><pre class="line-numbers language-none"><code class="language-none">alt+Enter<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="打开文件记录-默认上一页"><a href="#打开文件记录-默认上一页" class="headerlink" title="打开文件记录(默认上一页)"></a>打开文件记录(默认上一页)</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+table<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="代码格式化"><a href="#代码格式化" class="headerlink" title="代码格式化"></a>代码格式化</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+shift+F<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="提示参数类型"><a href="#提示参数类型" class="headerlink" title="提示参数类型"></a>提示参数类型</h2><pre class="line-numbers language-none"><code class="language-none">ctrl+alt+&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="查看某个包下的类容"><a href="#查看某个包下的类容" class="headerlink" title="查看某个包下的类容"></a>查看某个包下的类容</h2><h3 id="以-scala-io包为例"><a href="#以-scala-io包为例" class="headerlink" title="以 scala.io包为例"></a>以 scala.io包为例</h3><pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"><span class="token comment">//先输入</span>scala<span class="token punctuation">.</span>io<span class="token punctuation">.</span>stdIn<span class="token comment">//然后光标移动到io,并按住 ctrl + B</span><span class="token comment">//这样左侧就会出现目录</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> idea </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
   
   
 </search>
