@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="tzkTangXS">
+    <meta name="keywords" content="-A0.IS_REWRITE_ENABLED">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>tzkTangXS</title>
+    <title>创建Hive表时,报错Unknown column &#39;A0.IS_REWRITE_ENABLED&#39; in &#39;field list&#39; | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">创建Hive表时,报错Unknown column &#39;A0.IS_REWRITE_ENABLED&#39; in &#39;field list&#39;</h1>
                 </div>
             </div>
         </div>
@@ -429,12 +429,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/hive%E5%85%83%E6%95%B0%E6%8D%AE/">
+                                <span class="chip bg-color">hive元数据</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/hive/" class="post-category">
+                                hive
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -443,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-22
+                    2021-03-23
                 </div>
                 
 
@@ -482,7 +495,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="创建Hive表时-报错Unknown-column-‘A0-IS-REWRITE-ENABLED’-in-‘field-list’"><a href="#创建Hive表时-报错Unknown-column-‘A0-IS-REWRITE-ENABLED’-in-‘field-list’" class="headerlink" title="创建Hive表时,报错Unknown column ‘A0.IS_REWRITE_ENABLED’ in ‘field list’"></a>创建Hive表时,报错Unknown column ‘A0.IS_REWRITE_ENABLED’ in ‘field list’</h2><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="在hive的元数据-mysql中的metastore数据库中-的TBLS表中添加相应字段"><a href="#在hive的元数据-mysql中的metastore数据库中-的TBLS表中添加相应字段" class="headerlink" title="在hive的元数据(mysql中的metastore数据库中)的TBLS表中添加相应字段"></a>在hive的元数据(mysql中的metastore数据库中)的TBLS表中添加相应字段</h3><p><img src="/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/602be56e-1040-47fd-ad3d-0c5abdd73507.png" alt="添加成功后的表结构"><br><strong>比如这次遇到的错误就是没有IS_REWRITE_ENABLED字段.</strong><br>修改sql语法</p>
+                <h2 id="创建Hive表时-报错Unknown-column-‘A0-IS-REWRITE-ENABLED’-in-‘field-list’"><a href="#创建Hive表时-报错Unknown-column-‘A0-IS-REWRITE-ENABLED’-in-‘field-list’" class="headerlink" title="创建Hive表时,报错Unknown column ‘A0.IS_REWRITE_ENABLED’ in ‘field list’"></a>创建Hive表时,报错Unknown column ‘A0.IS_REWRITE_ENABLED’ in ‘field list’</h2><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="在hive的元数据-mysql中的metastore数据库中-的TBLS表中添加相应字段"><a href="#在hive的元数据-mysql中的metastore数据库中-的TBLS表中添加相应字段" class="headerlink" title="在hive的元数据(mysql中的metastore数据库中)的TBLS表中添加相应字段"></a>在hive的元数据(mysql中的metastore数据库中)的TBLS表中添加相应字段</h3><p><img src="/2021/03/23/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/602be56e-1040-47fd-ad3d-0c5abdd73507.png" alt="添加成功后的表结构"><br><strong>比如这次遇到的错误就是没有IS_REWRITE_ENABLED字段.</strong><br>修改sql语法</p>
 <hr>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">table</span> TBLS <span class="token keyword">add</span> IS_REWRITE_ENABLED <span class="token keyword">bit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">default</span> b<span class="token string">'0'</span><span class="token punctuation">;</span>
 <span class="token keyword">alter</span> <span class="token keyword">table</span> TBLS change IS_REWRITE_ENABLED NEW_NAME <span class="token keyword">bit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">default</span> b<span class="token string">'0'</span><span class="token punctuation">;</span>
@@ -514,7 +527,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/">http://tzktangxs.github.io/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/</a>
+                    <a href="http://tzktangxs.github.io/2021/03/23/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/">http://tzktangxs.github.io/2021/03/23/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -551,7 +564,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/hive%E5%85%83%E6%95%B0%E6%8D%AE/">
+                                    <span class="chip bg-color">hive元数据</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -719,18 +736,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/">
+                <a href="/2021/11/16/hello-world/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -740,9 +756,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-16
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -751,7 +767,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -759,16 +774,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2022/02/28/sql-lian-jie-bian-xi/">
+                <a href="/2021/03/23/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="sql联接辨析">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="创建Hive表时,报错Unknown column &#39;A0.IS_REWRITE_ENABLED&#39; in &#39;field list&#39;">
                         
-                        <span class="card-title">sql联接辨析</span>
+                        <span class="card-title">创建Hive表时,报错Unknown column &#39;A0.IS_REWRITE_ENABLED&#39; in &#39;field list&#39;</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -779,29 +794,26 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-23
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SQL/" class="post-category">
-                                    SQL
+                            <a href="/categories/hive/" class="post-category">
+                                    hive
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SQL/">
-                        <span class="chip bg-color">SQL</span>
-                    </a>
-                    
-                    <a href="/tags/MySQL/">
-                        <span class="chip bg-color">MySQL</span>
+                    <a href="/tags/hive%E5%85%83%E6%95%B0%E6%8D%AE/">
+                        <span class="chip bg-color">hive元数据</span>
                     </a>
                     
                 </div>
@@ -1004,7 +1016,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.2k</span>&nbsp;字
+                class="white-color">21.1k</span>&nbsp;字
             
             
             
