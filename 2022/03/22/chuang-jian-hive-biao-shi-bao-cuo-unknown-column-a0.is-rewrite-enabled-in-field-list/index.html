@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="sql">
+    <meta name="keywords" content="tzkTangXS">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>sql-inner,left,right,full outer join,union,union all | tzkTangXS</title>
+    <title>tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">sql-inner,left,right,full outer join,union,union all</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -429,29 +429,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/SQL/">
-                                <span class="chip bg-color">SQL</span>
-                            </a>
-                        
-                            <a href="/tags/MySQL/">
-                                <span class="chip bg-color">MySQL</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/SQL/" class="post-category">
-                                SQL
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -460,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-28
+                    2022-03-22
                 </div>
                 
 
@@ -469,7 +452,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    99
                 </div>
                 
 
@@ -499,7 +482,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="创建Hive表时-报错Unknown-column-‘A0-IS-REWRITE-ENABLED’-in-‘field-list’"><a href="#创建Hive表时-报错Unknown-column-‘A0-IS-REWRITE-ENABLED’-in-‘field-list’" class="headerlink" title="创建Hive表时,报错Unknown column ‘A0.IS_REWRITE_ENABLED’ in ‘field list’"></a>创建Hive表时,报错Unknown column ‘A0.IS_REWRITE_ENABLED’ in ‘field list’</h2><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="在hive的元数据-mysql中的metastore数据库中-的TBLS表中添加相应字段"><a href="#在hive的元数据-mysql中的metastore数据库中-的TBLS表中添加相应字段" class="headerlink" title="在hive的元数据(mysql中的metastore数据库中)的TBLS表中添加相应字段"></a>在hive的元数据(mysql中的metastore数据库中)的TBLS表中添加相应字段</h3><p><img src="/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/602be56e-1040-47fd-ad3d-0c5abdd73507.png" alt="添加成功后的表结构"><br><strong>比如这次遇到的错误就是没有IS_REWRITE_ENABLED字段.</strong><br>修改sql语法</p>
+<hr>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">table</span> TBLS <span class="token keyword">add</span> IS_REWRITE_ENABLED <span class="token keyword">bit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">default</span> b<span class="token string">'0'</span><span class="token punctuation">;</span>
+<span class="token keyword">alter</span> <span class="token keyword">table</span> TBLS change IS_REWRITE_ENABLED NEW_NAME <span class="token keyword">bit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">default</span> b<span class="token string">'0'</span><span class="token punctuation">;</span>
+<span class="token keyword">alter</span> <span class="token keyword">table</span> TBLS <span class="token keyword">drop</span> IS_REWRITE_ENABLED<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/63782822/setting-up-azure-sql-external-metastore-for-azure-databricks-invalid-column-na" title="StackOverFlow">参考解决方案出处</a></p>
+
                 
             </div>
             <hr/>
@@ -525,7 +514,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/">http://tzktangxs.github.io/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/</a>
+                    <a href="http://tzktangxs.github.io/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/">http://tzktangxs.github.io/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -562,15 +551,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/SQL/">
-                                    <span class="chip bg-color">SQL</span>
-                                </a>
-                            
-                                <a href="/tags/MySQL/">
-                                    <span class="chip bg-color">MySQL</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -738,9 +719,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            tzkTangXS
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2022/02/28/sql-lian-jie-bian-xi/">
                     <div class="card-image">
@@ -758,9 +778,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -782,55 +802,6 @@
                     
                     <a href="/tags/MySQL/">
                         <span class="chip bg-color">MySQL</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/01/18/idea-chang-yong-kuai-jie-jian/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="idea常用快捷键">
-                        
-                        <span class="card-title">idea常用快捷键</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-18
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/idea/" class="post-category">
-                                    idea
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/idea/">
-                        <span class="chip bg-color">idea</span>
                     </a>
                     
                 </div>

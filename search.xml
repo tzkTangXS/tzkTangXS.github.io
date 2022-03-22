@@ -4,11 +4,24 @@
   
     
     <entry>
-      <title>sql-inner,left,right,full outer join,union,union all</title>
-      <link href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/"/>
-      <url>/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/</url>
+      <title></title>
+      <link href="/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/"/>
+      <url>/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="创建Hive表时-报错Unknown-column-‘A0-IS-REWRITE-ENABLED’-in-‘field-list’"><a href="#创建Hive表时-报错Unknown-column-‘A0-IS-REWRITE-ENABLED’-in-‘field-list’" class="headerlink" title="创建Hive表时,报错Unknown column ‘A0.IS_REWRITE_ENABLED’ in ‘field list’"></a>创建Hive表时,报错Unknown column ‘A0.IS_REWRITE_ENABLED’ in ‘field list’</h2><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="在hive的元数据-mysql中的metastore数据库中-的TBLS表中添加相应字段"><a href="#在hive的元数据-mysql中的metastore数据库中-的TBLS表中添加相应字段" class="headerlink" title="在hive的元数据(mysql中的metastore数据库中)的TBLS表中添加相应字段"></a>在hive的元数据(mysql中的metastore数据库中)的TBLS表中添加相应字段</h3><p><img src="/2022/03/22/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/602be56e-1040-47fd-ad3d-0c5abdd73507.png" alt="添加成功后的表结构"><br><strong>比如这次遇到的错误就是没有IS_REWRITE_ENABLED字段.</strong><br>修改sql语法</p><hr><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">table</span> TBLS <span class="token keyword">add</span> IS_REWRITE_ENABLED <span class="token keyword">bit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">default</span> b<span class="token string">'0'</span><span class="token punctuation">;</span><span class="token keyword">alter</span> <span class="token keyword">table</span> TBLS change IS_REWRITE_ENABLED NEW_NAME <span class="token keyword">bit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">default</span> b<span class="token string">'0'</span><span class="token punctuation">;</span><span class="token keyword">alter</span> <span class="token keyword">table</span> TBLS <span class="token keyword">drop</span> IS_REWRITE_ENABLED<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p><a href="https://stackoverflow.com/questions/63782822/setting-up-azure-sql-external-metastore-for-azure-databricks-invalid-column-na" title="StackOverFlow">参考解决方案出处</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>sql联接辨析</title>
+      <link href="/2022/02/28/sql-lian-jie-bian-xi/"/>
+      <url>/2022/02/28/sql-lian-jie-bian-xi/</url>
+      
+        <content type="html"><![CDATA[<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/2022/02/28/sql-lian-jie-bian-xi/1.jpg"></p><h2 id="union-和-union-all的异同"><a href="#union-和-union-all的异同" class="headerlink" title="union 和 union all的异同"></a>union 和 union all的异同</h2><ul><li>相同点<br>首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)</li><li>区别<br>union去重,而union all不去重</li><li>用法:<br>select * from t1 unoin select * from t2<br>select * from t1 unoin all select * from t2</li></ul><p>图解:<br><img src="/2022/02/28/sql-lian-jie-bian-xi/2.jpg"><br><img src="/2022/02/28/sql-lian-jie-bian-xi/3.jpg"></p>]]></content>
       
       
       <categories>
@@ -31,11 +44,11 @@
     
     
     <entry>
-      <title>sql联接辨析</title>
-      <link href="/2022/02/28/sql-lian-jie-bian-xi/"/>
-      <url>/2022/02/28/sql-lian-jie-bian-xi/</url>
+      <title>sql-inner,left,right,full outer join,union,union all</title>
+      <link href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/"/>
+      <url>/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/</url>
       
-        <content type="html"><![CDATA[<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/2022/02/28/sql-lian-jie-bian-xi/1.jpg"></p><h2 id="union-和-union-all的异同"><a href="#union-和-union-all的异同" class="headerlink" title="union 和 union all的异同"></a>union 和 union all的异同</h2><ul><li>相同点<br>首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)</li><li>区别<br>union去重,而union all不去重</li><li>用法:<br>select * from t1 unoin select * from t2<br>select * from t1 unoin all select * from t2</li></ul><p>图解:<br><img src="/2022/02/28/sql-lian-jie-bian-xi/2.jpg"><br><img src="/2022/02/28/sql-lian-jie-bian-xi/3.jpg"></p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
       
       <categories>
