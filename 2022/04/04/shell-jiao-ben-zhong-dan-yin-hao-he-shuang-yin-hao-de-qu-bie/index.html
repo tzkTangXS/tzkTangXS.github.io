@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="lrzsz">
+    <meta name="keywords" content="双引号和单引号在shell中">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>linux上传下载 | tzkTangXS</title>
+    <title>手撕java集合 | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">linux上传下载</h1>
+                    <h1 class="description center-align post-title">手撕java集合</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/linux/">
-                                <span class="chip bg-color">linux</span>
+                            <a href="/tags/shell%E8%AF%AD%E6%B3%95/">
+                                <span class="chip bg-color">shell语法</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/linux/" class="post-category">
-                                linux
+                            <a href="/categories/shell/" class="post-category">
+                                shell
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-25
+                    2022-04-04
                 </div>
                 
 
@@ -465,7 +465,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    100
+                    140
                 </div>
                 
 
@@ -495,22 +495,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="linux文件上传下载使用lrzsz"><a href="#linux文件上传下载使用lrzsz" class="headerlink" title="linux文件上传下载使用lrzsz"></a>linux文件上传下载使用lrzsz</h1><h2 id="先安装这个工具"><a href="#先安装这个工具" class="headerlink" title="先安装这个工具"></a>先安装这个工具</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yum <span class="token function">install</span> -y lrzsz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><ul>
-<li><p>单文件下载</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sz filename<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>之后他会弹出GUI,点点点就行了</p>
-</li>
-<li><p>多文件下载</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sz filename,filename<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>下载目录下所有文件</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sz d/*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+                <h2 id="‘-‘里面的东西-不能解析引用"><a href="#‘-‘里面的东西-不能解析引用" class="headerlink" title="‘  ‘里面的东西,不能解析引用"></a>‘  ‘里面的东西,不能解析引用</h2><h3 id="e-g"><a href="#e-g" class="headerlink" title="e.g"></a>e.g</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">export</span> name <span class="token operator">=</span> <span class="token number">12</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>echo ‘$name ‘ 输出的就是$name<br>而echo “$name” 输出的是 \12</p>
+<p>==================================================<br></p>
+<p>然后再shell中,机器对于引号的理解是,按<strong>顺序</strong>来的.找到能够匹配的就直接匹配.</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 一下代码,本意是想使用嵌套引号</span>
+<span class="token string">"abd abd "</span>打印 <span class="token string">" abd bad"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>对于以上例子,机器的理解是(为例便于理解,将空格用下划线表示)</p>
+<ul>
+<li>分为三个部分:<br>abd_abd_<br>打印<br>_abd_abd</li>
+<li>合起来就是:<br>abd_abd_打印_abd_abd</li>
 </ul>
-<h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><ul>
-<li>统一操作<br>跳转到你想要的存放文件的linux目录下,使用如下命令<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">rz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-之后在GUI上操做就行.</li>
-</ul>
+<p>不难发现,打印后面的<strong>空格</strong>没有了.</p>
 
                 
             </div>
@@ -537,7 +533,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2021/11/25/linux-shang-chuan-xia-zai/">http://tzktangxs.github.io/2021/11/25/linux-shang-chuan-xia-zai/</a>
+                    <a href="http://tzktangxs.github.io/2022/04/04/shell-jiao-ben-zhong-dan-yin-hao-he-shuang-yin-hao-de-qu-bie/">http://tzktangxs.github.io/2022/04/04/shell-jiao-ben-zhong-dan-yin-hao-he-shuang-yin-hao-de-qu-bie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -575,8 +571,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/linux/">
-                                    <span class="chip bg-color">linux</span>
+                                <a href="/tags/shell%E8%AF%AD%E6%B3%95/">
+                                    <span class="chip bg-color">shell语法</span>
                                 </a>
                             
                         </div>
@@ -746,17 +742,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/11/29/han-shu-shi-bian-cheng/">
+                <a href="/2022/04/04/shell-jiao-ben-zhong-dan-yin-hao-he-shuang-yin-hao-de-qu-bie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="函数式编程">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="手撕java集合">
                         
-                        <span class="card-title">函数式编程</span>
+                        <span class="card-title">手撕java集合</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -766,30 +763,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Scala/" class="post-category">
-                                    Scala
+                            <a href="/categories/shell/" class="post-category">
+                                    shell
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Scala/">
-                        <span class="chip bg-color">Scala</span>
-                    </a>
-                    
-                    <a href="/tags/lambda/">
-                        <span class="chip bg-color">lambda</span>
+                    <a href="/tags/shell%E8%AF%AD%E6%B3%95/">
+                        <span class="chip bg-color">shell语法</span>
                     </a>
                     
                 </div>
@@ -803,13 +797,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/22/hadoop/">
+                <a href="/2022/03/23/chuang-jian-hive-biao-shi-bao-cuo-unknown-column-a0.is-rewrite-enabled-in-field-list/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="hadoop中 hdfs,yarn..等等流程图及解析">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="创建Hive表时,报错Unknown column &#39;A0.IS_REWRITE_ENABLED&#39; in &#39;field list&#39;">
                         
-                        <span class="card-title">hadoop中 hdfs,yarn..等等流程图及解析</span>
+                        <span class="card-title">创建Hive表时,报错Unknown column &#39;A0.IS_REWRITE_ENABLED&#39; in &#39;field list&#39;</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -820,14 +814,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-23
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/hadoop/" class="post-category">
-                                    hadoop
+                            <a href="/categories/hive/" class="post-category">
+                                    hive
                                 </a>
                             
                             
@@ -837,8 +831,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/hadoop/">
-                        <span class="chip bg-color">hadoop</span>
+                    <a href="/tags/hive%E5%85%83%E6%95%B0%E6%8D%AE/">
+                        <span class="chip bg-color">hive元数据</span>
                     </a>
                     
                 </div>

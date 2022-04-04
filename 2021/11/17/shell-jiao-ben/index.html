@@ -2808,7 +2808,10 @@ and get_json_object(line,'$.err') is not null;"</span>
         hive -e <span class="token string">"<span class="token variable">$dwd_start_log</span><span class="token variable">$dwd_page_log</span><span class="token variable">$dwd_action_log</span><span class="token variable">$dwd_display_log</span><span class="token variable">$dwd_error_log</span>"</span>
     <span class="token punctuation">;</span><span class="token punctuation">;</span>
 <span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<h2 id="azkaban启动脚本"><a href="#azkaban启动脚本" class="headerlink" title="azkaban启动脚本"></a>azkaban启动脚本</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">case</span> <span class="token variable">$1</span> <span class="token keyword">in</span>
+<span class="token string">"start"</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> hadoop101 hadoop102 hadoop103
+<span class="token function">ssh</span> <span class="token variable">$i</span> <span class="token string">'cd /opt/module/EBDW/azkaban/azkaban-exec &amp;&amp; bin/start-exec.sh &amp;&amp; curl -G "$i:12321/executor?action=activate" &amp;&amp; echo'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -3338,7 +3341,7 @@ and get_json_object(line,'$.err') is not null;"</span>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.2k</span>&nbsp;字
+                class="white-color">21.3k</span>&nbsp;字
             
             
             
