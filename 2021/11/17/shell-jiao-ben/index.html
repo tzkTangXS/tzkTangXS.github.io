@@ -469,14 +469,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.1k
+                    6.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    36 分
+                    37 分
                 </div>
                 
 
@@ -2810,8 +2810,29 @@ and get_json_object(line,'$.err') is not null;"</span>
 <span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="azkaban启动脚本"><a href="#azkaban启动脚本" class="headerlink" title="azkaban启动脚本"></a>azkaban启动脚本</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">case</span> <span class="token variable">$1</span> <span class="token keyword">in</span>
 <span class="token string">"start"</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> hadoop101 hadoop102 hadoop103
-<span class="token function">ssh</span> <span class="token variable">$i</span> <span class="token string">'cd /opt/module/EBDW/azkaban/azkaban-exec &amp;&amp; bin/start-exec.sh &amp;&amp; curl -G "$i:12321/executor?action=activate" &amp;&amp; echo'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token builtin class-name">echo</span> <span class="token string">"===============开始启动azkaban"</span>
+        <span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> hadoop101 hadoop102 hadoop103
+        <span class="token keyword">do</span>
+                <span class="token builtin class-name">echo</span> <span class="token string">"============<span class="token variable">$i</span>的azkaban-exec启动中==========="</span>
+                <span class="token function">ssh</span> <span class="token variable">$i</span> <span class="token string">'cd /opt/module/EBDW/azkaban/azkaban-exec &amp;&amp; bin/start-exec.sh'</span>
+                <span class="token function">ssh</span> <span class="token variable">$i</span> <span class="token string">"cd /opt/module/EBDW/azkaban/azkaban-exec &amp;&amp; curl -G <span class="token variable">$i</span>:12321/executor?action=activate"</span>
+        <span class="token keyword">done</span>
+<span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token string">"stop"</span><span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"===============开始启动azkaban"</span>
+        <span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> hadoop101 hadoop102 hadoop103
+        <span class="token keyword">do</span>
+                <span class="token builtin class-name">echo</span> <span class="token string">"============<span class="token variable">$i</span>的azkaban-exec启动中==========="</span>
+                <span class="token function">ssh</span> <span class="token variable">$i</span> <span class="token string">"cd /opt/module/EBDW/azkaban/azkaban-exec &amp;&amp; bin/shutdown-exec.sh"</span>
+        <span class="token keyword">done</span>
+<span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是暂时不知道为什么,在执行激活命令的时候出现了端口请求拒绝的反馈.<br>只能分别手动执行激活命令</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># curl 就是符合URL规则的文件传输工具</span>
+<span class="token function">curl</span> -G hadoop101:12321/executor?action<span class="token operator">=</span>activate <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span>
+<span class="token function">curl</span> -G hadoop102:12321/executor?action<span class="token operator">=</span>activate <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span>
+<span class="token function">curl</span> -G hadoop103:12321/executor?action<span class="token operator">=</span>activate <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>
@@ -3341,7 +3362,7 @@ and get_json_object(line,'$.err') is not null;"</span>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.3k</span>&nbsp;字
+                class="white-color">21.9k</span>&nbsp;字
             
             
             
