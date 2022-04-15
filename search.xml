@@ -8,7 +8,7 @@
       <link href="/2022/04/14/sparksql-zu-jian-li-jie/"/>
       <url>/2022/04/14/sparksql-zu-jian-li-jie/</url>
       
-        <content type="html"><![CDATA[<h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><p>他是一种以RDD为基础的分布式数据集,相当于传统数据库的二维表.</p><p>但是,他与RDD的主要区别在于,他包含了schema元信息.</p><p>即他为数据提供了schema的视图.具体见下图</p><p><img src="/2022/04/14/sparksql-zu-jian-li-jie/RDDperson.png" alt="RDD[person]">    <img src="/2022/04/14/sparksql-zu-jian-li-jie/DataFrame.png" alt="DataFrame"></p><p>然后有以下几点需要理解:</p><ol><li>他是包含schema元数据信息的<ol><li>这使得spark-sql可以了解到数据更多的结构信息.<ol><li>这就意味着,sqarkSQL可以针对藏于DataFrame背后的数据源以及作用于其上的变化做出针对性的优化,这样也就理所当然的相较于RDD,其的效率得到大幅度的提升.(SparkCore只能作用于stage层面的流水线优化)</li></ol></li></ol></li><li>也是懒执行的,但是性能上要比RDD高<ol><li>这主要得益于他的优化执行计划,即查询计划通过Spark catalyst optimiser进行优化.(具体理解,看下前面代码和解析)<pre class="line-numbers language-scala" data-language="scala"><code class="language-scala">users<span class="token punctuation">.</span>join<span class="token punctuation">(</span>evnets<span class="token punctuation">,</span>users<span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span> <span class="token operator">==</span><span class="token operator">=</span> events<span class="token punctuation">(</span><span class="token string">"uid"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>filter<span class="token punctuation">(</span>events<span class="token punctuation">(</span><span class="token string">"data"</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token string">"2015-01-01"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>如果按照这个代码逻辑执行,那么,在fitler之前就行join操作,必然是没有在fitler进行join操作来得效率高的.因为join是要进行shuffle的,越是大量的数据说要进行的shuffle代价就越是庞大.所以Spark SQL的查询优化器会将fitler放在join之前进行操作.</li></ol></li></ol><h2 id="DataSet"><a href="#DataSet" class="headerlink" title="DataSet"></a>DataSet</h2><p>他是spark 1.6添加的新抽象.</p><ol><li>DataSet = RDD的强类型优势(强大的lambda函数能力) + Spark SQL 的优化执行(DataFrame的优势)</li><li>DataSet 如何使用类型:DataSet[Person],DataSet[Student]</li><li>DataFrame相当于是DataSet的一个特例,类型为RowDataFrame = DataSet[Row]</li><li>DataSet 也可以使用功能性的转换（操作 map，flatMap，filter<br>等等）</li></ol>]]></content>
+        <content type="html"><![CDATA[<h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><p>他是一种以RDD为基础的分布式数据集,相当于传统数据库的二维表.</p><p>但是,他与RDD的主要区别在于,他包含了schema元信息.</p><p>即他为数据提供了schema的视图.具体见下图</p><p><img src="/2022/04/14/sparksql-zu-jian-li-jie/RDDPerson.png" alt="RDD[person]">    <img src="/2022/04/14/sparksql-zu-jian-li-jie/DataFrame.png" alt="DataFrame"></p><p>然后有以下几点需要理解:</p><ol><li>他是包含schema元数据信息的<ol><li>这使得spark-sql可以了解到数据更多的结构信息.<ol><li>这就意味着,sqarkSQL可以针对藏于DataFrame背后的数据源以及作用于其上的变化做出针对性的优化,这样也就理所当然的相较于RDD,其的效率得到大幅度的提升.(SparkCore只能作用于stage层面的流水线优化)</li></ol></li></ol></li><li>也是懒执行的,但是性能上要比RDD高<ol><li>这主要得益于他的优化执行计划,即查询计划通过Spark catalyst optimiser进行优化.(具体理解,看下前面代码和解析)<pre class="line-numbers language-scala" data-language="scala"><code class="language-scala">users<span class="token punctuation">.</span>join<span class="token punctuation">(</span>evnets<span class="token punctuation">,</span>users<span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span> <span class="token operator">==</span><span class="token operator">=</span> events<span class="token punctuation">(</span><span class="token string">"uid"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>filter<span class="token punctuation">(</span>events<span class="token punctuation">(</span><span class="token string">"data"</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token string">"2015-01-01"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>如果按照这个代码逻辑执行,那么,在fitler之前就行join操作,必然是没有在fitler进行join操作来得效率高的.因为join是要进行shuffle的,越是大量的数据说要进行的shuffle代价就越是庞大.所以Spark SQL的查询优化器会将fitler放在join之前进行操作.</li></ol></li></ol><h2 id="DataSet"><a href="#DataSet" class="headerlink" title="DataSet"></a>DataSet</h2><p>他是spark 1.6添加的新抽象.</p><ol><li>DataSet = RDD的强类型优势(强大的lambda函数能力) + Spark SQL 的优化执行(DataFrame的优势)</li><li>DataSet 如何使用类型:DataSet[Person],DataSet[Student]</li><li>DataFrame相当于是DataSet的一个特例,类型为RowDataFrame = DataSet[Row]</li><li>DataSet 也可以使用功能性的转换（操作 map，flatMap，filter<br>等等）</li></ol>]]></content>
       
       
       <categories>
@@ -92,11 +92,11 @@
     
     
     <entry>
-      <title>sql-inner,left,right,full outer join,union,union all</title>
-      <link href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/"/>
-      <url>/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/</url>
+      <title>sql联接辨析</title>
+      <link href="/2022/02/28/sql-lian-jie-bian-xi/"/>
+      <url>/2022/02/28/sql-lian-jie-bian-xi/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/2022/02/28/sql-lian-jie-bian-xi/1.jpg"></p><h2 id="union-和-union-all的异同"><a href="#union-和-union-all的异同" class="headerlink" title="union 和 union all的异同"></a>union 和 union all的异同</h2><ul><li>相同点<br>首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)</li><li>区别<br>union去重,而union all不去重</li><li>用法:<br>select * from t1 unoin select * from t2<br>select * from t1 unoin all select * from t2</li></ul><p>图解:<br><img src="/2022/02/28/sql-lian-jie-bian-xi/2.jpg"><br><img src="/2022/02/28/sql-lian-jie-bian-xi/3.jpg"></p>]]></content>
       
       
       <categories>
@@ -119,11 +119,11 @@
     
     
     <entry>
-      <title>sql联接辨析</title>
-      <link href="/2022/02/28/sql-lian-jie-bian-xi/"/>
-      <url>/2022/02/28/sql-lian-jie-bian-xi/</url>
+      <title>sql-inner,left,right,full outer join,union,union all</title>
+      <link href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/"/>
+      <url>/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/</url>
       
-        <content type="html"><![CDATA[<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/2022/02/28/sql-lian-jie-bian-xi/1.jpg"></p><h2 id="union-和-union-all的异同"><a href="#union-和-union-all的异同" class="headerlink" title="union 和 union all的异同"></a>union 和 union all的异同</h2><ul><li>相同点<br>首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)</li><li>区别<br>union去重,而union all不去重</li><li>用法:<br>select * from t1 unoin select * from t2<br>select * from t1 unoin all select * from t2</li></ul><p>图解:<br><img src="/2022/02/28/sql-lian-jie-bian-xi/2.jpg"><br><img src="/2022/02/28/sql-lian-jie-bian-xi/3.jpg"></p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
       
       <categories>
