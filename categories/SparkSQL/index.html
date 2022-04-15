@@ -362,37 +362,37 @@
                 
                 
                 
-                <a href="/categories/hive/" title="hive: 7">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">hive
-                        <span class="tag-length">7</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/SQL/" title="SQL: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">SQL
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/categories/Data-Warehouse/" title="Data Warehouse: 4">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D5F5E3;">Data Warehouse
+                            style="background-color: #F9EBEA;">Data Warehouse
                         <span class="tag-length">4</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/SparkSQL/" title="SparkSQL: 1">
+                <a href="/categories/hive/" title="hive: 7">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F5EEF8;">hive
+                        <span class="tag-length">7</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/SparkSQL/" title="SparkSQL: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
-                            style="background-color: #E8F8F5;">SparkSQL
+                            style="background-color: #D5F5E3;">SparkSQL
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/Data-Warehouse/bigdata/" title="bigdata: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #E8F8F5;">bigdata
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -407,19 +407,19 @@
                 </a>
                 
                 
-                <a href="/categories/git/" title="git: 1">
+                <a href="/categories/SQL/" title="SQL: 3">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8F9F9;">git
-                        <span class="tag-length">1</span>
+                            style="background-color: #F8F9F9;">SQL
+                        <span class="tag-length">3</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/Data-Warehouse/bigdata/" title="bigdata: 1">
+                <a href="/categories/git/" title="git: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #82E0AA;">bigdata
+                            style="background-color: #82E0AA;">git
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -479,6 +479,15 @@
                 </a>
                 
                 
+                <a href="/categories/scala/" title="scala: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #FEF9E7;">scala
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/categories/English/" title="English: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
@@ -516,6 +525,58 @@
 
     <article id="articles" class="container articles">
         <div class="row tags-posts">
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2022/04/15/sparksql-de-ji-chu-ming-ling/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="SparkSQL组件的理解">
+                            
+                            <span class="card-title">SparkSQL组件的理解</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                DF,DS,RDD三者转换
+
+val rdd = sc.makeRDD(List(("张三",23),("李四",22)))
+// RDD => DF
+val df = rdd.toDF
+// RDD => DS
+// 可以直接转,但是工作
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-15
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/SparkSQL/" class="post-category">
+                                    SparkSQL
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/SparkSQL/">
+                            <span class="chip bg-color">SparkSQL</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
@@ -645,7 +706,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.9k</span>&nbsp;字
+                class="white-color">22.4k</span>&nbsp;字
             
             
             

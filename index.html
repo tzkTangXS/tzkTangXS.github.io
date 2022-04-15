@@ -704,6 +704,112 @@ DWD：数据明细层，对数据的一个清洗（判空过滤，去除脏数�
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2022/04/15/scala-ji-he-yu-java-ji-he-de-hu-zhuan/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="scala集合与java集合的互转">
+                            
+                            <span class="card-title">scala集合与java集合的互转</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                通过隐式转换
+import scala.collection.JavaConverters._
+//创建scala集合
+val list = List(1,2,3)
+//scala转java
+val jList = list.asJava
+
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-15
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/scala/" class="post-category">
+                                    scala
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/java%E5%92%8Cscala%E9%9B%86%E5%90%88%E8%BD%AC%E6%8D%A2/">
+                            <span class="chip bg-color">java和scala集合转换</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2022/04/15/sparksql-de-ji-chu-ming-ling/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="SparkSQL组件的理解">
+                            
+                            <span class="card-title">SparkSQL组件的理解</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                DF,DS,RDD三者转换
+
+val rdd = sc.makeRDD(List(("张三",23),("李四",22)))
+// RDD => DF
+val df = rdd.toDF
+// RDD => DS
+// 可以直接转,但是工作
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-15
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/SparkSQL/" class="post-category">
+                                    SparkSQL
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/SparkSQL/">
+                            <span class="chip bg-color">SparkSQL</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2022/04/14/sparksql-zu-jian-li-jie/">
                         <div class="card-image">
                             
@@ -886,24 +992,18 @@ echo ‘$name ‘ 输出的就是$name而echo “$name” 输出的是 \12
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2022/02/28/sql-lian-jie-bian-xi/">
+                    <a href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="sql联接辨析">
+                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="sql-inner,left,right,full outer join,union,union all">
                             
-                            <span class="card-title">sql联接辨析</span>
+                            <span class="card-title">sql-inner,left,right,full outer join,union,union all</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
-                            
-                                图解
-union 和 union all的异同
-相同点首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)
-区别union去重,而union all不去重
-用法:select * from t1 unoin se
                             
                         </div>
                         <div class="publish-info">
@@ -941,18 +1041,24 @@ union 和 union all的异同
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/">
+                    <a href="/2022/02/28/sql-lian-jie-bian-xi/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="sql-inner,left,right,full outer join,union,union all">
+                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="sql联接辨析">
                             
-                            <span class="card-title">sql-inner,left,right,full outer join,union,union all</span>
+                            <span class="card-title">sql联接辨析</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
+                            
+                                图解
+union 和 union all的异同
+相同点首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)
+区别union去重,而union all不去重
+用法:select * from t1 unoin se
                             
                         </div>
                         <div class="publish-info">
@@ -1191,108 +1297,6 @@ select id,
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/12/13/wei-du-biao-he-shi-shi-biao/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="维度表和事实表">
-                            
-                            <span class="card-title">维度表和事实表</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                维度表相当于对象
-事实表存储维度表外键与度量值(这个事件中除了对象之外的属性)
-接下来直接上例子，就很好理解了做一个淘宝的模拟建模:今天小明去淘宝买了一瓶灵泛得乐，花费25块钱
-
-   维度表:根据时间,地点,人物理论建模time(时间)s
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-13
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Data-Warehouse/" class="post-category">
-                                    Data Warehouse
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Data-Warehouse/">
-                            <span class="chip bg-color">Data Warehouse</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/30/guan-yu-he-equals-de-bi-jiao/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="关于==和equals的比较">
-                            
-                            <span class="card-title">关于==和equals的比较</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                ==
-存放在堆中,比较地址像对象啊比较的就是地址
-存放在栈中,比较值像基本数据类型,比较的就是值
-
-equals在objec里equals就是直接用的==至于他们为什么会有区别呢?那是因为在String,Integer,Date等类中,eq
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-30
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/java/" class="post-category">
-                                    java
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/java/">
-                            <span class="chip bg-color">java</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 
@@ -1394,7 +1398,7 @@ equals在objec里equals就是直接用的==至于他们为什么会有区别呢?
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.9k</span>&nbsp;字
+                class="white-color">22.4k</span>&nbsp;字
             
             
             
