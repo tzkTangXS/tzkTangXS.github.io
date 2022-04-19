@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>理论实战经验汇总</title>
+      <link href="/2022/04/19/li-lun-shi-zhan-jing-yan-hui-zong/"/>
+      <url>/2022/04/19/li-lun-shi-zhan-jing-yan-hui-zong/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h1><h2 id="SparkCore"><a href="#SparkCore" class="headerlink" title="SparkCore"></a>SparkCore</h2><h3 id="Spark工作流程"><a href="#Spark工作流程" class="headerlink" title="Spark工作流程"></a>Spark工作流程</h3><h4 id="图解："><a href="#图解：" class="headerlink" title="图解："></a>图解：</h4><p><img src="/2022/04/19/li-lun-shi-zhan-jing-yan-hui-zong/SparkWorkStream.png" alt="Spark工作流程图"></p><h4 id="文字解说"><a href="#文字解说" class="headerlink" title="文字解说:"></a>文字解说:</h4><p>1.SparkContext向资源管理器注册并申请资源运行Executor</p><p>2.资源管理器分配资源,运行Executor</p><p>3.Executor发送心跳至资源管理器</p><p>4.SparkContext构建DAG</p><p>5.根据宽表划分Stage</p><p>6.将Stage发送给TaskScheduler</p><p>7.Executor向SparkContext请求Task</p><p>8.TaskScheduler将Task给Executor执行.同时SparkContext将应用程序代码发送给Executor</p><p>9.Task在Executor上运行,运行完毕,释放资源.</p><br><h3 id="Spark的组件构成"><a href="#Spark的组件构成" class="headerlink" title="Spark的组件构成:"></a>Spark的组件构成:</h3><ol><li>Master 管理集群与节点,不参与计算</li><li>Work 计算节点,进程本身不参与计算</li><li>Driver 运行程序的main()方法,创建SparkContext</li><li>SparkContext 管理Application的整个生命周期,包括DAGScheduler等组件</li><li>Client 用户提交程序的入口</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> BigData </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SparkSQL小题</title>
       <link href="/2022/04/17/sparksql-xiao-ti/"/>
       <url>/2022/04/17/sparksql-xiao-ti/</url>
@@ -223,11 +242,11 @@
     
     
     <entry>
-      <title>sql-inner,left,right,full outer join,union,union all</title>
-      <link href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/"/>
-      <url>/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/</url>
+      <title>sql联接辨析</title>
+      <link href="/2022/02/28/sql-lian-jie-bian-xi/"/>
+      <url>/2022/02/28/sql-lian-jie-bian-xi/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/2022/02/28/sql-lian-jie-bian-xi/1.jpg"></p><h2 id="union-和-union-all的异同"><a href="#union-和-union-all的异同" class="headerlink" title="union 和 union all的异同"></a>union 和 union all的异同</h2><ul><li>相同点<br>首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)</li><li>区别<br>union去重,而union all不去重</li><li>用法:<br>select * from t1 unoin select * from t2<br>select * from t1 unoin all select * from t2</li></ul><p>图解:<br><img src="/2022/02/28/sql-lian-jie-bian-xi/2.jpg"><br><img src="/2022/02/28/sql-lian-jie-bian-xi/3.jpg"></p>]]></content>
       
       
       <categories>
@@ -250,11 +269,11 @@
     
     
     <entry>
-      <title>sql联接辨析</title>
-      <link href="/2022/02/28/sql-lian-jie-bian-xi/"/>
-      <url>/2022/02/28/sql-lian-jie-bian-xi/</url>
+      <title>sql-inner,left,right,full outer join,union,union all</title>
+      <link href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/"/>
+      <url>/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/</url>
       
-        <content type="html"><![CDATA[<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/2022/02/28/sql-lian-jie-bian-xi/1.jpg"></p><h2 id="union-和-union-all的异同"><a href="#union-和-union-all的异同" class="headerlink" title="union 和 union all的异同"></a>union 和 union all的异同</h2><ul><li>相同点<br>首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)</li><li>区别<br>union去重,而union all不去重</li><li>用法:<br>select * from t1 unoin select * from t2<br>select * from t1 unoin all select * from t2</li></ul><p>图解:<br><img src="/2022/02/28/sql-lian-jie-bian-xi/2.jpg"><br><img src="/2022/02/28/sql-lian-jie-bian-xi/3.jpg"></p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
       
       <categories>
