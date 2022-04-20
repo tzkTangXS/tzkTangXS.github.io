@@ -242,11 +242,11 @@
     
     
     <entry>
-      <title>sql联接辨析</title>
-      <link href="/2022/02/28/sql-lian-jie-bian-xi/"/>
-      <url>/2022/02/28/sql-lian-jie-bian-xi/</url>
+      <title>sql-inner,left,right,full outer join,union,union all</title>
+      <link href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/"/>
+      <url>/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/</url>
       
-        <content type="html"><![CDATA[<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/2022/02/28/sql-lian-jie-bian-xi/1.jpg"></p><h2 id="union-和-union-all的异同"><a href="#union-和-union-all的异同" class="headerlink" title="union 和 union all的异同"></a>union 和 union all的异同</h2><ul><li>相同点<br>首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)</li><li>区别<br>union去重,而union all不去重</li><li>用法:<br>select * from t1 unoin select * from t2<br>select * from t1 unoin all select * from t2</li></ul><p>图解:<br><img src="/2022/02/28/sql-lian-jie-bian-xi/2.jpg"><br><img src="/2022/02/28/sql-lian-jie-bian-xi/3.jpg"></p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
       
       <categories>
@@ -269,11 +269,11 @@
     
     
     <entry>
-      <title>sql-inner,left,right,full outer join,union,union all</title>
-      <link href="/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/"/>
-      <url>/2022/02/28/sql-inner-left-right-full-outer-join-union-union-all/</url>
+      <title>sql联接辨析</title>
+      <link href="/2022/02/28/sql-lian-jie-bian-xi/"/>
+      <url>/2022/02/28/sql-lian-jie-bian-xi/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/2022/02/28/sql-lian-jie-bian-xi/1.jpg"></p><h2 id="union-和-union-all的异同"><a href="#union-和-union-all的异同" class="headerlink" title="union 和 union all的异同"></a>union 和 union all的异同</h2><ul><li>相同点<br>首先两表所查询的列数与列的类型顺序都必须相同.(简单点,就是所要查询的列要相同)</li><li>区别<br>union去重,而union all不去重</li><li>用法:<br>select * from t1 unoin select * from t2<br>select * from t1 unoin all select * from t2</li></ul><p>图解:<br><img src="/2022/02/28/sql-lian-jie-bian-xi/2.jpg"><br><img src="/2022/02/28/sql-lian-jie-bian-xi/3.jpg"></p>]]></content>
       
       
       <categories>
