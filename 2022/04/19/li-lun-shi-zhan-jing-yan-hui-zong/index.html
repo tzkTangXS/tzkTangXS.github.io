@@ -461,7 +461,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    181
+                    352
                 </div>
                 
 
@@ -510,6 +510,30 @@
 <li>SparkContext 管理Application的整个生命周期,包括DAGScheduler等组件</li>
 <li>Client 用户提交程序的入口</li>
 </ol>
+<br>
+
+<h3 id="Spark组件中RDD的机制理解"><a href="#Spark组件中RDD的机制理解" class="headerlink" title="Spark组件中RDD的机制理解"></a>Spark组件中RDD的机制理解</h3><ol>
+<li>RDD(Resilient Distributed Dataset)是弹性分布式数据集</li>
+<li>但是,它本身是不存储数据的:<ol>
+<li>初代RDD: 存储有分区信息和得到数据的方法.</li>
+<li>子代RDD: 存储血缘关系.</li>
+</ol>
+</li>
+<li>那么数据在哪里呢?在Task里面.</li>
+<li>所以每一次执行collect或者行动算子都要重塑一遍血缘关系.</li>
+</ol>
+<p>补充:</p>
+<ol>
+<li>一下有一组关于RDD的定义(据说是Spark源码中对于RDD的定义)<ol>
+<li>A list of partitions</li>
+<li>A function for computing each split</li>
+<li>A list of dependencies on other RDDS</li>
+<li>Optionally,a partitioner for key-value RDDS</li>
+<li>Optionally,a list of preferred locations to compute each split on(e.g. block locations for an HDFS file)</li>
+</ol>
+</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/129346816">参考这篇文章</a></p>
 
                 
             </div>
@@ -1030,7 +1054,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">24.2k</span>&nbsp;字
+                class="white-color">24.4k</span>&nbsp;字
             
             
             
