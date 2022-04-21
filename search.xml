@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>数仓项目-数据准备</title>
+      <link href="/2022/04/21/shu-ju-zhun-bei/"/>
+      <url>/2022/04/21/shu-ju-zhun-bei/</url>
+      
+        <content type="html"><![CDATA[<h2 id="日志数据的准备"><a href="#日志数据的准备" class="headerlink" title="日志数据的准备"></a>日志数据的准备</h2><p>在此项目中，由于配置了两个生产者，所以，分别在hadoop101,hadoop102上修改生成数据的时间.</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment"># 修改两台机器上的生产者时间为2020-06-16</span>vim <span class="token operator">/</span>opt<span class="token operator">/</span>module<span class="token operator">/</span>EBDW<span class="token operator">/</span>applog<span class="token operator">/</span>application<span class="token punctuation">.</span>yml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p><img src="/2022/04/21/shu-ju-zhun-bei/log_update.png" alt="application.yml"></p><p>启动生成日志脚本</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">loggen<span class="token punctuation">.</span>sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><a href="https://tzktangxs.github.io/2021/11/17/shell-jiao-ben/#toc-heading-24">脚本编写,见此处</a></p><h2 id="业务数据准备"><a href="#业务数据准备" class="headerlink" title="业务数据准备"></a>业务数据准备</h2><p>修改hadoop101上的配置文件</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">vim <span class="token operator">/</span>opt<span class="token operator">/</span>module<span class="token operator">/</span>EBDW<span class="token operator">/</span>db_log<span class="token operator">/</span>application<span class="token punctuation">.</span>properties <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><img src="/2022/04/21/shu-ju-zhun-bei/%E4%B8%9A%E5%8A%A1%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png" alt="application.properties "></p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">java <span class="token operator">-</span>jar <span class="token operator">/</span>opt<span class="token operator">/</span>module<span class="token operator">/</span>EBDW<span class="token operator">/</span>db_log<span class="token operator">/</span>gmall2020<span class="token operator">-</span>mock<span class="token operator">-</span>db<span class="token operator">-</span>2021<span class="token operator">-</span>01<span class="token operator">-</span>22<span class="token punctuation">.</span>jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Data Warehouse </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>理论实战经验汇总</title>
       <link href="/2022/04/19/li-lun-shi-zhan-jing-yan-hui-zong/"/>
       <url>/2022/04/19/li-lun-shi-zhan-jing-yan-hui-zong/</url>
