@@ -469,7 +469,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.2k
+                    6.3k
                 </div>
                 
 
@@ -2832,6 +2832,16 @@ and get_json_object(line,'$.err') is not null;"</span>
 <span class="token function">curl</span> -G hadoop101:12321/executor?action<span class="token operator">=</span>activate <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span>
 <span class="token function">curl</span> -G hadoop102:12321/executor?action<span class="token operator">=</span>activate <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span>
 <span class="token function">curl</span> -G hadoop103:12321/executor?action<span class="token operator">=</span>activate <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>azkaban-web端口: 8081<br>url: hadoop101:8081<br>user: tzk<br>password: tzk</p>
+<h2 id="superset"><a href="#superset" class="headerlink" title="superset"></a>superset</h2><p>Superset-web端口: 8787</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 1.进入conda设置的superset环境</span>
+conda activate superset
+<span class="token comment"># 退出环境代码为:</span>
+conda deactivate
+
+<span class="token comment"># 启动superset-web服务</span>
+gunicorn --workers <span class="token number">5</span> --timeout <span class="token number">120</span> --bind hadoop101:8787 <span class="token string">"superset.app:create_app()"</span> --daemon<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>user: Superset init<br>password: 764991</p>
 
                 
             </div>
@@ -3362,7 +3372,7 @@ and get_json_object(line,'$.err') is not null;"</span>
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">24.4k</span>&nbsp;字
+                class="white-color">24.5k</span>&nbsp;字
             
             
             

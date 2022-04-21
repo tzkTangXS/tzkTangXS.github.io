@@ -380,20 +380,20 @@
                 </a>
                 
                 
-                <a href="/categories/SparkSQL/" title="SparkSQL: 4">
+                <a href="/categories/SQL/" title="SQL: 3">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D5F5E3;">SparkSQL
-                        <span class="tag-length">4</span>
+                            style="background-color: #D5F5E3;">SQL
+                        <span class="tag-length">3</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/SQL/" title="SQL: 3">
+                <a href="/categories/SparkSQL/" title="SparkSQL: 4">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #E8F8F5;">SQL
-                        <span class="tag-length">3</span>
+                            style="background-color: #E8F8F5;">SparkSQL
+                        <span class="tag-length">4</span>
                     </span>
                 </a>
                 
@@ -434,19 +434,10 @@
                 </a>
                 
                 
-                <a href="/categories/linux/shell/" title="shell: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #A3E4D7;">shell
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/categories/idea/" title="idea: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #85C1E9;">idea
+                            style="background-color: #A3E4D7;">idea
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -455,7 +446,7 @@
                 <a href="/categories/java/" title="java: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8C471;">java
+                            style="background-color: #85C1E9;">java
                         <span class="tag-length">2</span>
                     </span>
                 </a>
@@ -464,8 +455,17 @@
                 <a href="/categories/office/" title="office: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F9E79F;">office
+                            style="background-color: #F8C471;">office
                         <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/linux/shell/" title="shell: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F9E79F;">shell
+                        <span class="tag-length">2</span>
                     </span>
                 </a>
                 
@@ -665,7 +665,7 @@ Int => Int
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">24.4k</span>&nbsp;字
+                class="white-color">24.5k</span>&nbsp;字
             
             
             
@@ -812,6 +812,83 @@ $(function () {
                                 keywords.forEach(function (keyword) {
                                     var regS = new RegExp(keyword, "gi");
                                     match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
+_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
                                 });
 
                                 str += "<p class=\"search-result\">" + match_content + "...</p>"
