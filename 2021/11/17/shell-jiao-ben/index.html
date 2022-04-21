@@ -469,14 +469,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.3k
+                    6.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    37 分
+                    38 分
                 </div>
                 
 
@@ -2842,6 +2842,13 @@ conda deactivate
 <span class="token comment"># 启动superset-web服务</span>
 gunicorn --workers <span class="token number">5</span> --timeout <span class="token number">120</span> --bind hadoop101:8787 <span class="token string">"superset.app:create_app()"</span> --daemon<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>user: Superset init<br>password: 764991</p>
+<h2 id="hiveserver2"><a href="#hiveserver2" class="headerlink" title="hiveserver2"></a>hiveserver2</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hive --service hiveserver<span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="日志数据生成脚本"><a href="#日志数据生成脚本" class="headerlink" title="日志数据生成脚本"></a>日志数据生成脚本</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token shebang important">#!/bin/bash</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> hadoop101 hadoop102<span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"========== <span class="token variable">$i</span> =========="</span>
+    <span class="token function">ssh</span> <span class="token variable">$i</span> <span class="token string">"cd /opt/module/EBDW/applog/; java -jar gmall2020-mock-log-2021-01-22.jar >/dev/null 2>&amp;1 &amp;"</span>
+<span class="token keyword">done</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
