@@ -469,14 +469,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.4k
+                    6.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    38 分
+                    39 分
                 </div>
                 
 
@@ -2839,9 +2839,65 @@ conda activate superset
 <span class="token comment"># 退出环境代码为:</span>
 conda deactivate
 
-<span class="token comment"># 启动superset-web服务</span>
-gunicorn --workers <span class="token number">5</span> --timeout <span class="token number">120</span> --bind hadoop101:8787 <span class="token string">"superset.app:create_app()"</span> --daemon<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 启动Superset服务</span>
+gunicorn --workers <span class="token number">5</span> --timeout <span class="token number">120</span> --bind hadoop101:8787 <span class="token string">"superset.app:create_app()"</span> --daemon
+<span class="token comment"># 关闭Superset</span>
+  <span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'/gunicorn/ &amp;&amp; !/awk/&#123;print $2&#125;'</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">kill</span> -9<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>user: Superset init<br>password: 764991</p>
+<h3 id="Superset-sh"><a href="#Superset-sh" class="headerlink" title="Superset.sh"></a>Superset.sh</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token function-name function">superset_status</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token assign-left variable">result</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'/gunicorn/ &amp;&amp; !/awk/&#123;print $2&#125;'</span> <span class="token operator">|</span> <span class="token function">wc</span> -l<span class="token variable">`</span></span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$result</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">return</span> <span class="token number">0</span>
+    <span class="token keyword">else</span>
+        <span class="token builtin class-name">return</span> <span class="token number">1</span>
+    <span class="token keyword">fi</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function-name function">superset_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token builtin class-name">source</span> ~/.bashrc
+        superset_status <span class="token operator">></span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span>
+        <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$?</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+            conda activate superset <span class="token punctuation">;</span> gunicorn --workers <span class="token number">5</span> --timeout <span class="token number">120</span> --bind hadoop101:8787 --daemon <span class="token string">'superset.app:create_app()'</span>
+        <span class="token keyword">else</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">"superset正在运行"</span>
+        <span class="token keyword">fi</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token function-name function">superset_stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    superset_status <span class="token operator">></span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$?</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"superset未在运行"</span>
+    <span class="token keyword">else</span>
+        <span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'/gunicorn/ &amp;&amp; !/awk/&#123;print $2&#125;'</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">kill</span> -9
+    <span class="token keyword">fi</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token keyword">case</span> <span class="token variable">$1</span> <span class="token keyword">in</span>
+    start <span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"启动Superset"</span>
+        superset_start
+    <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    stop <span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"停止Superset"</span>
+        superset_stop
+    <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    restart <span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">"重启Superset"</span>
+        superset_stop
+        superset_start
+    <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    status <span class="token punctuation">)</span>
+        superset_status <span class="token operator">></span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span>
+        <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$?</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">"superset未在运行"</span>
+        <span class="token keyword">else</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">"superset正在运行"</span>
+        <span class="token keyword">fi</span>
+<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="hiveserver2"><a href="#hiveserver2" class="headerlink" title="hiveserver2"></a>hiveserver2</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hive --service hiveserver<span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="日志数据生成脚本"><a href="#日志数据生成脚本" class="headerlink" title="日志数据生成脚本"></a>日志数据生成脚本</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token shebang important">#!/bin/bash</span>
 <span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> hadoop101 hadoop102<span class="token punctuation">;</span> <span class="token keyword">do</span>
@@ -3379,7 +3435,7 @@ gunicorn --workers <span class="token number">5</span> --timeout <span class="to
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">24.6k</span>&nbsp;字
+                class="white-color">24.8k</span>&nbsp;字
             
             
             
