@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="hdfs,yarn">
+    <meta name="keywords" content="数据倾斜">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>hadoop中 hdfs,yarn..等等流程图及解析 | tzkTangXS</title>
+    <title>数据倾斜问题（Hive） | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">hadoop中 hdfs,yarn..等等流程图及解析</h1>
+                    <h1 class="description center-align post-title">数据倾斜问题（Hive）</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/hadoop/">
-                                <span class="chip bg-color">hadoop</span>
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/">
+                                <span class="chip bg-color">数据倾斜</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/hadoop/" class="post-category">
-                                hadoop
+                            <a href="/categories/Hive/" class="post-category">
+                                Hive
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-22
+                    2022-06-09
                 </div>
                 
 
@@ -465,14 +465,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    335
+                    721
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -495,26 +495,69 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="hadoop中-hdfs-yarn-等等流程图"><a href="#hadoop中-hdfs-yarn-等等流程图" class="headerlink" title="hadoop中 hdfs,yarn..等等流程图"></a>hadoop中 hdfs,yarn..等等流程图</h2><h3 id="HDFS写流程图"><a href="#HDFS写流程图" class="headerlink" title="HDFS写流程图:"></a>HDFS写流程图:</h3><h4 id="文字解说"><a href="#文字解说" class="headerlink" title="文字解说:"></a>文字解说:</h4><p><strong>HDFS客户端创建分布式文件系统:</strong></p>
-<ul>
-<li>1.向NameNode提交在HDFS上创建文件的申请.</li>
-<li>DataNode核对:<br>是否拥有权限(是)<br>是否才在此文件(否)</li>
-<li>2.满足条件后,NameNode返回同意响应.</li>
-<li>3.向NameNode提交上传第一个块的请求</li>
-<li>4.NameNode返回用于存储该块的DataNode</li>
-<li>选取策略:<br>本地节点<br>其他机架上的节点<br>其他机架上的不通节点</li>
-</ul>
-<p><strong>收到消息后,HDFS客户端打开outputstream:</strong></p>
-<ul>
-<li>5.向DataNode1提交请求,建立Block传输通道,DataNode之间层层传递直到最后一个DataNode3.</li>
-<li>6.DataNode3返回同意,在层层同意之后返回FSDataOutputStream</li>
-<li>7.然后开始以Packet(64k)为单位传递给DataNode</li>
-<li>1.DataNode内部,数据是在ByteBuffer里不断流动给下一个DataNode的,与此同时,又会持久化于本地磁盘.</li>
-<li>2.Packet每次传递后,节点都会逐层给与应答,只有当都成功了后,才会给与下一个Packet,否则再次传递.</li>
-<li>3.Packet是由(chunk512byte+chunksum4byte(校验位))攒够64K形成的.<br>&emsp;提一下,在HDFS客户端开启FSDataOutputstra之前,会先创建一个这个缓冲队列,这个队列就是用来慢慢形成一个个的Packet.</li>
-<li>传递完成后给与NameNode反馈</li>
-</ul>
-<p><img src="/2021/11/22/hadoop/HDFS%E5%86%99%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B.png" alt="HDFS写流程图"></p>
+                <h2 id="6大倾斜问题清单"><a href="#6大倾斜问题清单" class="headerlink" title="6大倾斜问题清单"></a>6大倾斜问题清单</h2><ol>
+<li>NULL值导致的数据倾斜</li>
+<li>大文件不可拆分导致的数据倾斜</li>
+<li>小表JOIN大表导致的数据倾斜</li>
+<li>统一字段不同数据类型导致的数据倾斜</li>
+<li>确实无法减少数据量导致的数据倾斜</li>
+<li>数据膨胀导致的数据倾斜</li>
+</ol>
+<h3 id="1-空值导致的数据倾斜"><a href="#1-空值导致的数据倾斜" class="headerlink" title="1. 空值导致的数据倾斜"></a>1. 空值导致的数据倾斜</h3><h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>key值为NULL，它们的hash值相同，被分配给同一个reduce导致的数据倾斜。</p>
+<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p><strong>1. 不让空值数据参与JOIN</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> a<span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">,</span>b<span class="token punctuation">.</span><span class="token operator">*</span> 
+<span class="token keyword">from</span> a 
+<span class="token keyword">left</span> <span class="token keyword">join</span> b <span class="token keyword">on</span> a<span class="token punctuation">.</span><span class="token keyword">key</span> <span class="token operator">is</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token operator">and</span> a<span class="token punctuation">.</span><span class="token keyword">key</span> <span class="token operator">=</span> b<span class="token punctuation">.</span><span class="token keyword">key</span>
+<span class="token keyword">union</span> <span class="token keyword">all</span> a <span class="token keyword">where</span> a<span class="token punctuation">.</span><span class="token keyword">key</span> <span class="token operator">is</span> <span class="token boolean">null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>2. 将空值后面加上随机数</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> a<span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">,</span>b<span class="token punctuation">.</span><span class="token operator">*</span>
+<span class="token keyword">from</span> a
+<span class="token keyword">left</span> <span class="token keyword">join</span> b
+<span class="token keyword">on</span> 
+<span class="token keyword">case</span> 
+<span class="token comment">-- when a.key is null then concat('tzk',',',rand())</span>
+<span class="token keyword">when</span> a<span class="token punctuation">.</span><span class="token keyword">key</span> <span class="token operator">is</span> <span class="token boolean">null</span> <span class="token keyword">then</span> concat_ws<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">,</span><span class="token string">'tzk'</span><span class="token punctuation">,</span>rand<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span> a<span class="token punctuation">.</span><span class="token keyword">key</span>
+<span class="token keyword">end</span> <span class="token operator">=</span> b<span class="token punctuation">.</span><span class="token keyword">key</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-大文件不可拆分导致的数据倾斜"><a href="#2-大文件不可拆分导致的数据倾斜" class="headerlink" title="2.大文件不可拆分导致的数据倾斜"></a>2.大文件不可拆分导致的数据倾斜</h3><h4 id="原因：-1"><a href="#原因：-1" class="headerlink" title="原因："></a>原因：</h4><p>文件过大，且压缩格式采用的是不可分割的格式比如Gzip</p>
+<h4 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a>解决方案：</h4><p>换一种压缩方案如：bzip2,Zip</p>
+<h3 id="3-表链接时引发的数据倾斜"><a href="#3-表链接时引发的数据倾斜" class="headerlink" title="3. 表链接时引发的数据倾斜"></a>3. 表链接时引发的数据倾斜</h3><h4 id="原因：-2"><a href="#原因：-2" class="headerlink" title="原因："></a>原因：</h4><p>某一张表的某一个Key数据倾斜严重。从而导致大量这个key值的数据在一个reduce中执行。</p>
+<h4 id="解决方案：-2"><a href="#解决方案：-2" class="headerlink" title="解决方案："></a>解决方案：</h4><p><strong>（1）如果是大表join小表</strong></p>
+<p>采用MapJoin，将小表放到内存中，在Map阶段Join,每一个MapTask（MapTask的数量由切片决定）中的数据与小表join，避免了Reduce阶段，从而避免了数据倾斜。<br>hive.auto.convert.join=true 默认值为true，自动开启MAPJOIN优化。<br>hive.mapjoin.smalltable.filesize=2500000</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> a<span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">,</span>b<span class="token punctuation">.</span><span class="token operator">*</span>
+<span class="token keyword">from</span> a
+<span class="token keyword">join</span> b <span class="token keyword">on</span> a<span class="token punctuation">.</span><span class="token keyword">key</span> <span class="token operator">=</span>b<span class="token punctuation">.</span><span class="token keyword">key</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>edit:<br>将表放到Map端内存时，如果节点的内存很大，但还是出现内存溢出的情况，我们可以通过这个参数 mapreduce.map.memory.mb  调节Map端内存的大小。</p>
+<p><strong>（1）大表join大表</strong></p>
+<p>同空值的处理类似，将导致数据倾斜的Key加上随机数。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 加入a.key== 大海时，数据占比40%</span>
+<span class="token keyword">select</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> a
+<span class="token keyword">left</span> <span class="token keyword">join</span> b <span class="token keyword">on</span>
+<span class="token keyword">case</span> a<span class="token punctuation">.</span><span class="token keyword">key</span>
+<span class="token keyword">when</span> <span class="token string">'大海'</span> <span class="token keyword">then</span> concat_ws<span class="token punctuation">(</span><span class="token string">'_'</span><span class="token punctuation">,</span>a<span class="token punctuation">.</span><span class="token keyword">key</span><span class="token punctuation">,</span>rand<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span> a<span class="token punctuation">.</span><span class="token keyword">key</span>
+<span class="token keyword">end</span> <span class="token operator">=</span> b<span class="token punctuation">.</span><span class="token keyword">key</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-同一字段不通类型导致的数据倾斜"><a href="#4-同一字段不通类型导致的数据倾斜" class="headerlink" title="4. 同一字段不通类型导致的数据倾斜"></a>4. 同一字段不通类型导致的数据倾斜</h3><h4 id="4-1-原因："><a href="#4-1-原因：" class="headerlink" title="4.1 原因："></a>4.1 原因：</h4><p>a表的key值类型为String或者int型，而b表则为int型。那么默认按照int，那么所有的String类型会被分配到同一个reduce导致数据倾斜。</p>
+<h4 id="4-2-解决方案："><a href="#4-2-解决方案：" class="headerlink" title="4.2 解决方案："></a>4.2 解决方案：</h4><p>统一数据类型，将Int转换为String。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">Select</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> a
+<span class="token keyword">left</span> <span class="token keyword">join</span> b
+<span class="token keyword">on</span> cast<span class="token punctuation">(</span>a<span class="token punctuation">.</span>user_id <span class="token keyword">as</span> String<span class="token punctuation">)</span> <span class="token operator">=</span> cast<span class="token punctuation">(</span>b<span class="token punctuation">.</span>user_id <span class="token keyword">as</span> String<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-确实无法减少数据量引发的数据倾斜"><a href="#5-确实无法减少数据量引发的数据倾斜" class="headerlink" title="5. 确实无法减少数据量引发的数据倾斜"></a>5. 确实无法减少数据量引发的数据倾斜</h3><h4 id="5-1-原因："><a href="#5-1-原因：" class="headerlink" title="5.1 原因："></a>5.1 原因：</h4><p>在一些操作中，我们无法减少同一个reduce处理的数据量。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> p<span class="token punctuation">.</span>id<span class="token punctuation">,</span>p<span class="token punctuation">.</span>province_name<span class="token punctuation">,</span>collect_list<span class="token punctuation">(</span>o<span class="token punctuation">.</span>final_amount<span class="token punctuation">)</span>
+<span class="token keyword">from</span> dwd_order_info o
+<span class="token keyword">right</span> <span class="token keyword">join</span> dim_base_province p
+<span class="token keyword">on</span> o<span class="token punctuation">.</span>province_id <span class="token operator">=</span> p<span class="token punctuation">.</span>id
+<span class="token keyword">group</span> <span class="token keyword">by</span> p<span class="token punctuation">.</span>id<span class="token punctuation">,</span>p<span class="token punctuation">.</span>province_name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="5-2-解决方案："><a href="#5-2-解决方案：" class="headerlink" title="5.2 解决方案："></a>5.2 解决方案：</h4><p>通过mapreduce.reduce.memory.mb这个参数增加reduce内存。</p>
+<p><a target="_blank" rel="noopener" href="https://www.yisu.com/zixun/488260.html">参考资料</a></p>
 
                 
             </div>
@@ -541,7 +584,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2021/11/22/hadoop/">http://tzktangxs.github.io/2021/11/22/hadoop/</a>
+                    <a href="http://tzktangxs.github.io/2022/06/09/shu-ju-qing-xie-wen-ti/">http://tzktangxs.github.io/2022/06/09/shu-ju-qing-xie-wen-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -579,8 +622,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/hadoop/">
-                                    <span class="chip bg-color">hadoop</span>
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/">
+                                    <span class="chip bg-color">数据倾斜</span>
                                 </a>
                             
                         </div>
@@ -750,17 +793,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/11/25/linux-shang-chuan-xia-zai/">
+                <a href="/2022/06/09/shu-ju-qing-xie-wen-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="linux上传下载">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="数据倾斜问题（Hive）">
                         
-                        <span class="card-title">linux上传下载</span>
+                        <span class="card-title">数据倾斜问题（Hive）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -770,26 +814,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/linux/" class="post-category">
-                                    linux
+                            <a href="/categories/Hive/" class="post-category">
+                                    Hive
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/">
+                        <span class="chip bg-color">数据倾斜</span>
                     </a>
                     
                 </div>
@@ -803,13 +848,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/22/office/">
+                <a href="/2022/06/07/mapreduce-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="office安装">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="MR源码">
                         
-                        <span class="card-title">office安装</span>
+                        <span class="card-title">MR源码</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -820,19 +865,27 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/office/" class="post-category">
-                                    office
+                            <a href="/categories/MapReduce/" class="post-category">
+                                    MapReduce
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MR/">
+                        <span class="chip bg-color">MR</span>
+                    </a>
+                    
                 </div>
                 
             </div>

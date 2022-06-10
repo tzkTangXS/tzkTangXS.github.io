@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: hive, tzkTangXS">
+    <meta name="keywords" content="分类: Hive, tzkTangXS">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类: hive | tzkTangXS</title>
+    <title>分类: Hive | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -364,7 +364,7 @@
                 
                 <a href="/categories/hive/" title="hive: 7">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
+                             chip-default "
                             style="background-color: #F9EBEA;">hive
                         <span class="tag-length">7</span>
                     </span>
@@ -461,20 +461,20 @@
                 </a>
                 
                 
-                <a href="/categories/office/" title="office: 1">
+                <a href="/categories/scala/" title="scala: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F9E79F;">office
-                        <span class="tag-length">1</span>
+                            style="background-color: #F9E79F;">scala
+                        <span class="tag-length">2</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/scala/" title="scala: 2">
+                <a href="/categories/office/" title="office: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #FEF9E7;">scala
-                        <span class="tag-length">2</span>
+                            style="background-color: #A3E4D7;">office
+                        <span class="tag-length">1</span>
                     </span>
                 </a>
                 
@@ -497,15 +497,6 @@
                 </a>
                 
                 
-                <a href="/categories/%E5%9B%BE%E7%89%87/" title="图片: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8C471;">图片
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/categories/English/" title="English: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
@@ -515,10 +506,10 @@
                 </a>
                 
                 
-                <a href="/categories/shell/Data-Warehouse/" title="Data Warehouse: 1">
+                <a href="/categories/%E5%9B%BE%E7%89%87/" title="图片: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #FFF;">Data Warehouse
+                            style="background-color: #F8C471;">图片
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -528,6 +519,24 @@
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             style="background-color: #F9E79F;">Scala
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/Hive/" title="Hive: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active "
+                            style="background-color: #F8F9F9;">Hive
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/shell/Data-Warehouse/" title="Data Warehouse: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #FFF;">Data Warehouse
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -555,31 +564,39 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2022/03/23/hive-cuo-wu-1/">
+                    <a href="/2022/06/09/shu-ju-qing-xie-wen-ti/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="创建Hive表时,报错Unknown column &#39;A0.IS_REWRITE_ENABLED&#39; in &#39;field list&#39;">
+                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="数据倾斜问题（Hive）">
                             
-                            <span class="card-title">创建Hive表时,报错Unknown column &#39;A0.IS_REWRITE_ENABLED&#39; in &#39;field list&#39;</span>
+                            <span class="card-title">数据倾斜问题（Hive）</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                创建Hive表时,报错Unknown column ‘A0.IS_REWRITE_ENABLED’ in ‘field list’解决方案在hive的元数据(mysql中的metastore数据库中)的TBLS表中添加相应字段比如这次遇到的
+                                6大倾斜问题清单
+NULL值导致的数据倾斜
+大文件不可拆分导致的数据倾斜
+小表JOIN大表导致的数据倾斜
+统一字段不同数据类型导致的数据倾斜
+确实无法减少数据量导致的数据倾斜
+数据膨胀导致的数据倾斜
+
+1. 空值导致的数据倾斜原因：key值
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-09
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/hive/" class="post-category">
-                                    hive
+                                <a href="/categories/Hive/" class="post-category">
+                                    Hive
                                 </a>
                                 
                                 
@@ -590,319 +607,8 @@
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/hive%E5%85%83%E6%95%B0%E6%8D%AE/">
-                            <span class="chip bg-color">hive元数据</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/20/ma-yi-jin-fu-de-ti-mu/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="蚂蚁金服题目">
-                            
-                            <span class="card-title">蚂蚁金服题目</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                题目今天做了两道蚂蚁金服的题目,题目蛮不错的,记录下吧
-背景说明：以下表记录了用户每天的蚂蚁森林低碳生活领取的记录流水。table_name：user_low_carbonuser_id data_dt  low_carbon用户     
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-20
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/hive/" class="post-category">
-                                    hive
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/hive/">
-                            <span class="chip bg-color">hive</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/19/hive-ji-chu/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="hive基础">
-                            
-                            <span class="card-title">hive基础</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                数据类型转换强转cast(‘4’ as INT)
-如果强制类型转换失败，如执行CAST(‘X’ AS INT)，表达式返回空值 NULL.
-DDL之后在复习,先过
-DML之后在复习,先过
-DSLEDIT:  sql里的基本语法就不再做赘述了
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/hive/" class="post-category">
-                                    hive
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/hive/">
-                            <span class="chip bg-color">hive</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/17/hive-chang-yong-han-shu/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="hive常用函数">
-                            
-                            <span class="card-title">hive常用函数</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                判空nvlselect nvl(salary,0) from emp;
-coalescecoalesce(a,b,c,’ddd’)解析:
-// scala
-if(a != null)&#123;
-	a
-&#125;else if(b != 
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/hive/" class="post-category">
-                                    hive
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/hive/">
-                            <span class="chip bg-color">hive</span>
-                        </a>
-                        
-                        <a href="/tags/function/">
-                            <span class="chip bg-color">function</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/17/dql-pai-xu/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="DQL-排序">
-                            
-                            <span class="card-title">DQL-排序</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                order by全排序
-reduce数只有一，不管设置没设置。
-select d.name,e.name from dept d left join emp e on d.id &#x3D; e.deptId order by d.id;
-
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/hive/" class="post-category">
-                                    hive
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/DQL/">
-                            <span class="chip bg-color">DQL</span>
-                        </a>
-                        
-                        <a href="/tags/hive/">
-                            <span class="chip bg-color">hive</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/17/kai-tian-chuang-yu-fou-de-qu-bie/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="开天窗与否的区别">
-                            
-                            <span class="card-title">开天窗与否的区别</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                关于开天窗与不开天窗的区别使用 over()是对最终结果集进行开天窗。
-如果不使用，即不开天窗。受到group by等函数影响。
-example:select name,count(1) 
-from business 
-where subs
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/hive/" class="post-category">
-                                    hive
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/hive/">
-                            <span class="chip bg-color">hive</span>
-                        </a>
-                        
-                        <a href="/tags/over/">
-                            <span class="chip bg-color">over()</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/11/16/udtf/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="UDTF原理">
-                            
-                            <span class="card-title">UDTF原理</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                原理解释Hive 的每一个sql会被解释成一个个的operator组成operators,数据放在java中的object中,数据类型放在object inspector中在oprator之间传递.
-
-edit:(object inspec
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-16
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/hive/" class="post-category">
-                                    hive
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/hive/">
-                            <span class="chip bg-color">hive</span>
-                        </a>
-                        
-                        <a href="/tags/udtf/">
-                            <span class="chip bg-color">udtf</span>
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/">
+                            <span class="chip bg-color">数据倾斜</span>
                         </a>
                         
                     </div>
@@ -986,7 +692,7 @@ edit:(object inspec
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">25.1k</span>&nbsp;字
+                class="white-color">25.8k</span>&nbsp;字
             
             
             
