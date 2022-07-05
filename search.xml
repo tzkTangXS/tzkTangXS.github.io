@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>spark读取文件</title>
+      <link href="/2022/07/04/spark-du-qu-wen-jian/"/>
+      <url>/2022/07/04/spark-du-qu-wen-jian/</url>
+      
+        <content type="html"><![CDATA[<h2 id="CSV文件的读取"><a href="#CSV文件的读取" class="headerlink" title="CSV文件的读取"></a>CSV文件的读取</h2><h3 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h3><p><strong>方法一</strong></p><pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"> <span class="token keyword">val</span> df1  <span class="token operator">=</span> spark<span class="token punctuation">.</span>read      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"header"</span><span class="token punctuation">,</span><span class="token string">"false"</span><span class="token punctuation">)</span>      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"multiLine"</span><span class="token punctuation">,</span><span class="token string">"true"</span><span class="token punctuation">)</span>      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"inferSchema"</span><span class="token punctuation">,</span> <span class="token string">"true"</span><span class="token punctuation">)</span>      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"encoding"</span><span class="token punctuation">,</span> <span class="token string">"gbk"</span><span class="token punctuation">)</span>      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"sep"</span><span class="token punctuation">,</span><span class="token string">"\t"</span><span class="token punctuation">)</span>      <span class="token punctuation">.</span>csv<span class="token punctuation">(</span><span class="token string">"datas/test.csv"</span><span class="token punctuation">)</span>      <span class="token punctuation">.</span>toDF<span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">,</span><span class="token string">"password"</span><span class="token punctuation">,</span><span class="token string">"address"</span><span class="token punctuation">)</span><span class="token comment">//      .as[User]</span>      df1<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>方法二</strong></p><pre class="line-numbers language-scala" data-language="scala"><code class="language-scala">spark<span class="token punctuation">.</span>sparkContext<span class="token punctuation">.</span>textFile<span class="token punctuation">(</span><span class="token string">"datas/test.csv"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>map <span class="token punctuation">&#123;</span>      line <span class="token keyword">=></span>        <span class="token keyword">val</span> strings <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">"\t"</span><span class="token punctuation">)</span>        User<span class="token punctuation">(</span>strings<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> strings<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> strings<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token punctuation">&#125;</span><span class="token punctuation">.</span>toDS<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> spark </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spark </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Kafka基础</title>
       <link href="/2022/06/15/kafka-ji-chu/"/>
       <url>/2022/06/15/kafka-ji-chu/</url>

@@ -754,6 +754,57 @@ NULL值导致的数据倾斜
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2022/07/04/spark-du-qu-wen-jian/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="spark读取文件">
+                            
+                            <span class="card-title">spark读取文件</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                CSV文件的读取代码展示方法一
+ val df1  = spark.read
+      .option("header","false")
+      .option("multiLine","true")
+      .option("
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-04
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/spark/" class="post-category">
+                                    spark
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/spark/">
+                            <span class="chip bg-color">spark</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2022/06/15/kafka-ji-chu/">
                         <div class="card-image">
                             
@@ -1296,59 +1347,6 @@ val df = rdd.toDF
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-04-15
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/SparkSQL/" class="post-category">
-                                    SparkSQL
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/SparkSQL/">
-                            <span class="chip bg-color">SparkSQL</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2022/04/14/sparksql-zu-jian-li-jie/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="SparkSQL组件的理解">
-                            
-                            <span class="card-title">SparkSQL组件的理解</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                DataFrame他是一种以RDD为基础的分布式数据集,相当于传统数据库的二维表.
-但是,他与RDD的主要区别在于,他包含了schema元信息.
-即他为数据提供了schema的视图.具体见下图
-    
-然后有以下几点需要理解:
-
-他是包含
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-14
                             </span>
                             <span class="publish-author">
                                 
