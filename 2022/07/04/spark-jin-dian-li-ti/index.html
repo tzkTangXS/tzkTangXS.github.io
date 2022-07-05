@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>spark读取文件 | tzkTangXS</title>
+    <title>Spark金典例题 | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">spark读取文件</h1>
+                    <h1 class="description center-align post-title">Spark金典例题</h1>
                 </div>
             </div>
         </div>
@@ -465,14 +465,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    71
+                    401
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -495,24 +495,118 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="CSV文件的读取"><a href="#CSV文件的读取" class="headerlink" title="CSV文件的读取"></a>CSV文件的读取</h2><h3 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h3><p><strong>方法一</strong></p>
-<pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"> <span class="token keyword">val</span> df1  <span class="token operator">=</span> spark<span class="token punctuation">.</span>read
-      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"header"</span><span class="token punctuation">,</span><span class="token string">"false"</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"multiLine"</span><span class="token punctuation">,</span><span class="token string">"true"</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"inferSchema"</span><span class="token punctuation">,</span> <span class="token string">"true"</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"encoding"</span><span class="token punctuation">,</span> <span class="token string">"gbk"</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span>option<span class="token punctuation">(</span><span class="token string">"sep"</span><span class="token punctuation">,</span><span class="token string">"\t"</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span>csv<span class="token punctuation">(</span><span class="token string">"datas/test.csv"</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span>toDF<span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">,</span><span class="token string">"password"</span><span class="token punctuation">,</span><span class="token string">"address"</span><span class="token punctuation">)</span>
-<span class="token comment">//      .as[User]</span>
-      df1<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <br>
 
-<p><strong>方法二</strong></p>
-<pre class="line-numbers language-scala" data-language="scala"><code class="language-scala">spark<span class="token punctuation">.</span>sparkContext<span class="token punctuation">.</span>textFile<span class="token punctuation">(</span><span class="token string">"datas/test.csv"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>map <span class="token punctuation">&#123;</span>
+<h3 id="解题方案"><a href="#解题方案" class="headerlink" title="解题方案"></a>解题方案</h3><pre class="line-numbers language-scala" data-language="scala"><code class="language-scala"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>tzk<span class="token punctuation">.</span>sparksql<span class="token punctuation">.</span>module</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>spark<span class="token punctuation">.</span></span>SparkConf
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>spark<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token punctuation">&#123;</span>Dataset<span class="token punctuation">,</span> Encoder<span class="token punctuation">,</span> Encoders<span class="token punctuation">,</span> SparkSession<span class="token punctuation">,</span> functions<span class="token punctuation">&#125;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>spark<span class="token punctuation">.</span>sql<span class="token punctuation">.</span>expressions<span class="token punctuation">.</span></span>Aggregator
+
+<span class="token keyword">import</span> <span class="token namespace">scala<span class="token punctuation">.</span>collection<span class="token punctuation">.</span>mutable</span>
+
+<span class="token keyword">object</span> Demo03 <span class="token punctuation">&#123;</span>
+  <span class="token keyword">def</span> main<span class="token punctuation">(</span>args<span class="token operator">:</span> Array<span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Unit</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//</span>
+    <span class="token keyword">val</span> conf <span class="token operator">=</span> <span class="token keyword">new</span> SparkConf<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>setMaster<span class="token punctuation">(</span><span class="token string">"local[*]"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>setAppName<span class="token punctuation">(</span><span class="token string">"ClickTop3"</span><span class="token punctuation">)</span>
+    <span class="token keyword">val</span> spark <span class="token operator">=</span> SparkSession<span class="token punctuation">.</span>builder<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>config<span class="token punctuation">(</span>conf<span class="token punctuation">)</span><span class="token punctuation">.</span>getOrCreate<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">import</span> <span class="token namespace">spark<span class="token punctuation">.</span>implicits<span class="token punctuation">.</span></span>_
+    <span class="token comment">//数据准备</span>
+    <span class="token keyword">val</span> sc <span class="token operator">=</span> spark<span class="token punctuation">.</span>sparkContext
+    sc<span class="token punctuation">.</span>textFile<span class="token punctuation">(</span><span class="token string">"datas/city_info.txt"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>map<span class="token punctuation">&#123;</span>
       line <span class="token keyword">=></span>
-        <span class="token keyword">val</span> strings <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">"\t"</span><span class="token punctuation">)</span>
-        User<span class="token punctuation">(</span>strings<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> strings<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> strings<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">.</span>toDS<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">val</span> datas <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">"\t"</span><span class="token punctuation">)</span>
+        City<span class="token punctuation">(</span>datas<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>toLong<span class="token punctuation">,</span>datas<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>datas<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">.</span>toDS<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">//操作</span>
+    spark<span class="token punctuation">.</span>udf<span class="token punctuation">.</span>register<span class="token punctuation">(</span><span class="token string">"rateCity"</span><span class="token punctuation">,</span>functions<span class="token punctuation">.</span>udaf<span class="token punctuation">(</span><span class="token keyword">new</span> RateCity<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    spark<span class="token punctuation">.</span>sql<span class="token punctuation">(</span>
+      <span class="token triple-quoted-string string">"""
+        |select
+        |u.*,
+        |p.product_name,
+        |c.city_name,c.area
+        |from user_visit_action u
+        |join product_info p on u.click_product_id = p.product_id
+        |join city_info c on u.city_id = c.city_id
+        |where u.click_product_id > -1
+        |"""</span><span class="token punctuation">.</span>stripMargin<span class="token punctuation">)</span><span class="token punctuation">.</span>createOrReplaceTempView<span class="token punctuation">(</span><span class="token string">"t1"</span><span class="token punctuation">)</span>
+    spark<span class="token punctuation">.</span>sql<span class="token punctuation">(</span>
+      <span class="token triple-quoted-string string">"""
+        |select
+        |t1.area,
+        |t1.product_name,
+        |count(*) as click_num,
+        |rateCity(t1.city_name) rate_city_remark
+        |from
+        |t1
+        |group by t1.area,t1.product_name
+        |"""</span><span class="token punctuation">.</span>stripMargin<span class="token punctuation">)</span><span class="token punctuation">.</span>createOrReplaceTempView<span class="token punctuation">(</span><span class="token string">"t2"</span><span class="token punctuation">)</span>
+    spark<span class="token punctuation">.</span>sql<span class="token punctuation">(</span>
+      <span class="token triple-quoted-string string">"""
+        |select
+        |area,
+        |product_name,
+        |click_num,
+        |rate_city_remark,
+        |rank() over(distribute by area sort by click_num desc) rank_num
+        |from
+        |t2
+        |"""</span><span class="token punctuation">.</span>stripMargin<span class="token punctuation">)</span><span class="token punctuation">.</span>createOrReplaceTempView<span class="token punctuation">(</span><span class="token string">"t3"</span><span class="token punctuation">)</span>
+    spark<span class="token punctuation">.</span>sql<span class="token punctuation">(</span>
+      <span class="token triple-quoted-string string">"""
+        |select *
+        |from(
+        |t2
+        |)t3
+        |where rank_num &lt;= 3
+        |"""</span><span class="token punctuation">.</span>stripMargin<span class="token punctuation">)</span><span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    spark<span class="token punctuation">.</span>stop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">case</span> <span class="token keyword">class</span> City<span class="token punctuation">(</span>city_id<span class="token operator">:</span>BigInt<span class="token punctuation">,</span>city_name<span class="token operator">:</span><span class="token builtin">String</span><span class="token punctuation">,</span>area<span class="token operator">:</span><span class="token builtin">String</span><span class="token punctuation">)</span>
+  <span class="token comment">/**
+   * In: String
+   * Buffer:Map((String,count),(String,count))
+   * Out: String*/</span>
+  <span class="token keyword">case</span> <span class="token keyword">class</span> Buff<span class="token punctuation">(</span><span class="token keyword">var</span> total<span class="token operator">:</span> <span class="token builtin">Long</span><span class="token punctuation">,</span>cityMap<span class="token operator">:</span> mutable<span class="token punctuation">.</span>Map<span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">,</span><span class="token builtin">Long</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token keyword">class</span> RateCity <span class="token keyword">extends</span> Aggregator<span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">,</span>Buff<span class="token punctuation">,</span><span class="token builtin">String</span><span class="token punctuation">]</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">override</span> <span class="token keyword">def</span> zero<span class="token operator">:</span> Buff <span class="token operator">=</span> Buff<span class="token punctuation">(</span><span class="token number">0L</span><span class="token punctuation">,</span>mutable<span class="token punctuation">.</span>Map<span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">,</span><span class="token builtin">Long</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">def</span> reduce<span class="token punctuation">(</span>b<span class="token operator">:</span> Buff<span class="token punctuation">,</span> a<span class="token operator">:</span> <span class="token builtin">String</span><span class="token punctuation">)</span><span class="token operator">:</span> Buff <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      b<span class="token punctuation">.</span>total <span class="token operator">+=</span> <span class="token number">1</span>
+      <span class="token keyword">val</span> newCount <span class="token operator">=</span> b<span class="token punctuation">.</span>cityMap<span class="token punctuation">.</span>getOrElse<span class="token punctuation">(</span>a<span class="token punctuation">,</span><span class="token number">0L</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1L</span>
+      b<span class="token punctuation">.</span>cityMap<span class="token punctuation">.</span>update<span class="token punctuation">(</span>a<span class="token punctuation">,</span>newCount<span class="token punctuation">)</span>
+      b
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">def</span> merge<span class="token punctuation">(</span>b1<span class="token operator">:</span> Buff<span class="token punctuation">,</span> b2<span class="token operator">:</span> Buff<span class="token punctuation">)</span><span class="token operator">:</span> Buff <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      b1<span class="token punctuation">.</span>total <span class="token operator">+=</span> b2<span class="token punctuation">.</span>total
+      b2<span class="token punctuation">.</span>cityMap<span class="token punctuation">.</span>foreach<span class="token punctuation">&#123;</span>
+        <span class="token keyword">case</span> <span class="token punctuation">(</span>t<span class="token punctuation">,</span>v<span class="token punctuation">)</span> <span class="token keyword">=></span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">val</span> newCount <span class="token operator">=</span> b1<span class="token punctuation">.</span>cityMap<span class="token punctuation">.</span>getOrElse<span class="token punctuation">(</span>t<span class="token punctuation">,</span> <span class="token number">0L</span><span class="token punctuation">)</span> <span class="token operator">+</span> v
+          b1<span class="token punctuation">.</span>cityMap<span class="token punctuation">.</span>update<span class="token punctuation">(</span>t<span class="token punctuation">,</span> newCount<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+      b1
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">def</span> finish<span class="token punctuation">(</span>reduction<span class="token operator">:</span> Buff<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">String</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">val</span> descCityMapList <span class="token operator">=</span> reduction<span class="token punctuation">.</span>cityMap<span class="token punctuation">.</span>toList<span class="token punctuation">.</span>sortBy<span class="token punctuation">(</span>_<span class="token punctuation">.</span>_2<span class="token punctuation">)</span><span class="token punctuation">.</span>reverse
+      <span class="token keyword">val</span> countTop1 <span class="token operator">=</span> descCityMapList<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>_2
+      <span class="token keyword">val</span> countTop2 <span class="token operator">=</span> descCityMapList<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>_2
+      <span class="token keyword">val</span> rateTop1 <span class="token operator">=</span> descCityMapList<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>_1<span class="token operator">+</span><span class="token punctuation">(</span><span class="token punctuation">(</span>countTop1<span class="token punctuation">.</span>toDouble<span class="token operator">/</span>reduction<span class="token punctuation">.</span>total<span class="token punctuation">.</span>toDouble<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">.</span>toLong<span class="token operator">+</span><span class="token string">"%"</span>
+      <span class="token keyword">val</span> rateTop2 <span class="token operator">=</span> descCityMapList<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>_1<span class="token operator">+</span><span class="token punctuation">(</span><span class="token punctuation">(</span>countTop2<span class="token punctuation">.</span>toDouble<span class="token operator">/</span>reduction<span class="token punctuation">.</span>total<span class="token punctuation">.</span>toDouble<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">.</span>toLong<span class="token operator">+</span><span class="token string">"%"</span>
+      <span class="token keyword">val</span> rateOther <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>reduction<span class="token punctuation">.</span>total<span class="token operator">-</span>countTop1<span class="token operator">-</span>countTop2<span class="token punctuation">)</span><span class="token punctuation">.</span>toDouble<span class="token operator">/</span>reduction<span class="token punctuation">.</span>total<span class="token punctuation">.</span>toDouble<span class="token punctuation">)</span><span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">.</span>toLong<span class="token operator">+</span><span class="token string">"%"</span>
+      rateTop1<span class="token operator">+</span><span class="token string">","</span><span class="token operator">+</span>rateTop2<span class="token operator">+</span><span class="token string">","</span><span class="token operator">+</span>rateOther
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">def</span> bufferEncoder<span class="token operator">:</span> Encoder<span class="token punctuation">[</span>Buff<span class="token punctuation">]</span> <span class="token operator">=</span> Encoders<span class="token punctuation">.</span>product
+
+    <span class="token keyword">override</span> <span class="token keyword">def</span> outputEncoder<span class="token operator">:</span> Encoder<span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">]</span> <span class="token operator">=</span> Encoders<span class="token punctuation">.</span>STRING
+  <span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 
@@ -540,7 +634,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2022/07/04/spark-du-qu-wen-jian/">http://tzktangxs.github.io/2022/07/04/spark-du-qu-wen-jian/</a>
+                    <a href="http://tzktangxs.github.io/2022/07/04/spark-jin-dian-li-ti/">http://tzktangxs.github.io/2022/07/04/spark-jin-dian-li-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -749,9 +843,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/07/04/spark-jin-dian-li-ti/">
                     <div class="card-image">
@@ -769,9 +864,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -784,6 +879,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -802,13 +898,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/06/15/kafka-ji-chu/">
+                <a href="/2022/07/04/spark-du-qu-wen-jian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Kafka基础">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="spark读取文件">
                         
-                        <span class="card-title">Kafka基础</span>
+                        <span class="card-title">spark读取文件</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -819,14 +915,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Kafka/" class="post-category">
-                                    Kafka
+                            <a href="/categories/spark/" class="post-category">
+                                    spark
                                 </a>
                             
                             
@@ -836,8 +932,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Kafka%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">
-                        <span class="chip bg-color">Kafka基础概念</span>
+                    <a href="/tags/spark/">
+                        <span class="chip bg-color">spark</span>
                     </a>
                     
                 </div>
