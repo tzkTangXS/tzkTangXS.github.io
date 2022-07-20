@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="双引号和单引号在shell中">
+    <meta name="keywords" content="procedure">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>shell脚本中单引号和双引号的区别 | tzkTangXS</title>
+    <title>基本数据库语言 | tzkTangXS</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">shell脚本中单引号和双引号的区别</h1>
+                    <h1 class="description center-align post-title">基本数据库语言</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/shell%E8%AF%AD%E6%B3%95/">
-                                <span class="chip bg-color">shell语法</span>
+                            <a href="/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E8%A8%80/">
+                                <span class="chip bg-color">基本数据库语言</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/shell/" class="post-category">
-                                shell
+                            <a href="/categories/MySQL/" class="post-category">
+                                MySQL
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-04
+                    2022-07-20
                 </div>
                 
 
@@ -465,7 +465,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    140
+                    205
                 </div>
                 
 
@@ -495,18 +495,44 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="‘-‘里面的东西-不能解析引用"><a href="#‘-‘里面的东西-不能解析引用" class="headerlink" title="‘  ‘里面的东西,不能解析引用"></a>‘  ‘里面的东西,不能解析引用</h2><h3 id="e-g"><a href="#e-g" class="headerlink" title="e.g"></a>e.g</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">export</span> name <span class="token operator">=</span> <span class="token number">12</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>echo ‘$name ‘ 输出的就是$name<br>而echo “$name” 输出的是 \12</p>
-<p>==================================================<br></p>
-<p>然后再shell中,机器对于引号的理解是,按<strong>顺序</strong>来的.找到能够匹配的就直接匹配.</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 一下代码,本意是想使用嵌套引号</span>
-<span class="token string">"abd abd "</span>打印 <span class="token string">" abd bad"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>对于以上例子,机器的理解是(为例便于理解,将空格用下划线表示)</p>
-<ul>
-<li>分为三个部分:<br>abd_abd_<br>打印<br>_abd_abd</li>
-<li>合起来就是:<br>abd_abd_打印_abd_abd</li>
-</ul>
-<p>不难发现,打印后面的<strong>空格</strong>没有了.</p>
+                <h3 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> t1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h3><h4 id="update"><a href="#update" class="headerlink" title="update"></a>update</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t1 <span class="token keyword">set</span> t1<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'张珊'</span> <span class="token keyword">where</span> t1<span class="token punctuation">.</span>id <span class="token operator">=</span> <span class="token number">20</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">delete</span> <span class="token keyword">from</span> t1 <span class="token punctuation">[</span><span class="token keyword">Where</span><span class="token punctuation">]</span> <span class="token comment">-- 自动增长的列的记录值不变，</span>
+<span class="token comment">-- 对于新添加的记录不会重新重1开始计数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>使用delete后可通过一下<a target="_blank" rel="noopener" href="https://www.shuzhiduo.com/A/kvJ3y2Y7dg/">方式</a>回滚数据</p>
+<h4 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">insert</span> <span class="token keyword">into</span> t1<span class="token punctuation">(</span>id<span class="token punctuation">,</span>name<span class="token punctuation">)</span>
+<span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'张珊'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h3><h4 id="drop"><a href="#drop" class="headerlink" title="drop"></a>drop</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">drop</span> <span class="token keyword">database</span> gmall<span class="token punctuation">;</span>
+<span class="token keyword">drop</span> <span class="token keyword">table</span> <span class="token keyword">if</span> <span class="token keyword">exists</span> user_info<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="truncate"><a href="#truncate" class="headerlink" title="truncate"></a>truncate</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">truncate</span> <span class="token keyword">table</span> product_sku<span class="token punctuation">;</span><span class="token comment">-- 自动增长的列的记录值重新归一</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="create"><a href="#create" class="headerlink" title="create"></a>create</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">database</span> gmall<span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> user_info<span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">user</span> <span class="token string">'tzk'</span><span class="token variable">@'%'</span> identified <span class="token keyword">by</span> <span class="token string">'tzk'</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> <span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="alter"><a href="#alter" class="headerlink" title="alter"></a>alter</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 修改字段名</span>
+<span class="token keyword">alter</span> <span class="token keyword">table</span> user_info change <span class="token keyword">column</span> advice_id adv_id <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span>
+<span class="token comment">-- 修改字段类型和约束</span>
+<span class="token keyword">alter</span> <span class="token keyword">table</span> user_info <span class="token keyword">modify</span> <span class="token keyword">column</span> adv_id <span class="token keyword">bigint</span>
+<span class="token comment">-- 添加字段</span>
+<span class="token keyword">alter</span> <span class="token keyword">table</span> user_info <span class="token keyword">add</span> <span class="token keyword">column</span> address_id <span class="token keyword">bigint</span>
+<span class="token comment">-- 删除字段</span>
+<span class="token keyword">alter</span> <span class="token keyword">table</span> user_info <span class="token keyword">drop</span> <span class="token keyword">column</span> address_id
+<span class="token comment">-- 修改表名</span>
+<span class="token keyword">alter</span> <span class="token keyword">table</span> user_info <span class="token keyword">rename</span> <span class="token punctuation">[</span><span class="token keyword">to</span><span class="token punctuation">]</span> user_info_t2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="DCL"><a href="#DCL" class="headerlink" title="DCL"></a>DCL</h3><h4 id="grant"><a href="#grant" class="headerlink" title="grant"></a>grant</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">grant</span> <span class="token keyword">select</span><span class="token punctuation">,</span><span class="token keyword">insert</span> <span class="token keyword">on</span> gmall<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">to</span> <span class="token string">'tzk'</span><span class="token variable">@'%'</span><span class="token punctuation">;</span>
+<span class="token keyword">grant</span> <span class="token keyword">all</span> <span class="token keyword">privileges</span> <span class="token keyword">on</span> gmall<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">to</span> <span class="token string">'tzk'</span><span class="token variable">@'%'</span><span class="token punctuation">;</span>
+<span class="token keyword">grant</span> <span class="token keyword">all</span> <span class="token keyword">privileges</span> <span class="token keyword">on</span> <span class="token operator">*</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">to</span> <span class="token string">'tzk'</span><span class="token variable">@'%'</span> <span class="token keyword">with</span> <span class="token keyword">grant</span> <span class="token keyword">option</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="revoke"><a href="#revoke" class="headerlink" title="revoke"></a>revoke</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">revoke</span> <span class="token keyword">all</span> <span class="token keyword">privileges</span> <span class="token keyword">on</span> <span class="token operator">*</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">'tzk'</span><span class="token variable">@'%'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 
                 
             </div>
@@ -533,7 +559,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tzktangxs.github.io/2022/04/04/shell-jiao-ben-zhong-dan-yin-hao-he-shuang-yin-hao-de-qu-bie/">http://tzktangxs.github.io/2022/04/04/shell-jiao-ben-zhong-dan-yin-hao-he-shuang-yin-hao-de-qu-bie/</a>
+                    <a href="http://tzktangxs.github.io/2022/07/20/ji-ben-shu-ju-ku-yu-yan/">http://tzktangxs.github.io/2022/07/20/ji-ben-shu-ju-ku-yu-yan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -571,8 +597,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/shell%E8%AF%AD%E6%B3%95/">
-                                    <span class="chip bg-color">shell语法</span>
+                                <a href="/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E8%A8%80/">
+                                    <span class="chip bg-color">基本数据库语言</span>
                                 </a>
                             
                         </div>
@@ -742,17 +768,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/14/sparksql-zu-jian-li-jie/">
+                <a href="/2022/07/20/ji-ben-shu-ju-ku-yu-yan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="SparkSQL组件的理解">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="基本数据库语言">
                         
-                        <span class="card-title">SparkSQL组件的理解</span>
+                        <span class="card-title">基本数据库语言</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -762,26 +789,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SparkSQL/" class="post-category">
-                                    SparkSQL
+                            <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SparkSQL/">
-                        <span class="chip bg-color">SparkSQL</span>
+                    <a href="/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">基本数据库语言</span>
                     </a>
                     
                 </div>
@@ -795,13 +823,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/04/shu-cang-xiang-mu-de-shu-ju-zhun-bei-jie-duan-de-bu-zou/">
+                <a href="/2022/07/20/cun-chu-guo-cheng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="存储过程">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">存储过程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -812,15 +840,27 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-20
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            tzkTangXS
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">
+                        <span class="chip bg-color">存储过程</span>
+                    </a>
+                    
                 </div>
                 
             </div>
