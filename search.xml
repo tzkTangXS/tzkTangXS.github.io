@@ -1255,6 +1255,31 @@
     
     
     <entry>
+      <title>git使用</title>
+      <link href="/2021/02/20/git-shi-yong/"/>
+      <url>/2021/02/20/git-shi-yong/</url>
+      
+        <content type="html"><![CDATA[<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">git init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">git clone 地址<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">-<span class="token operator">-</span> 先查看commitgit reflog<span class="token operator">--</span> 切换commitgit reset <span class="token operator">--</span>hard commitID <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h2 id="暴利push"><a href="#暴利push" class="headerlink" title="暴利push"></a>暴利push</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">git push <span class="token operator">--</span>force 地址<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 版本控制 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spark金典例题</title>
       <link href="/2020/07/04/spark-zhi-xing-jar-bao-mo-ban/"/>
       <url>/2020/07/04/spark-zhi-xing-jar-bao-mo-ban/</url>
